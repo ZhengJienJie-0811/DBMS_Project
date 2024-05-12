@@ -156,27 +156,13 @@
                 </tr>
                 <tr>
                     <td style="width: 160px;" class="content_table_04_title">
-                        轉帳起迄日
-                    </td>
-                    <td class="content_table_04_content">
-                        <input data-val="true" data-val-regex="轉帳起始日格式錯誤(格式：yyyy/mm/dd)" data-val-regex-pattern="^(19|20)\d\d/(((0[13578]|(10|12))/(0[1-9]|[1-2][0-9]|3[0-1]))|(02/(0[1-9]|[1-2][0-9]))|((0[469]|11)/(0[1-9]|[1-2][0-9]|30)))$" id="st_trandt" name="st_trandt" type="text" value="" />
-                        <label for="">～</label>
-                        <input data-val="true" data-val-greaterthan="結束日期不能小於開始日期" data-val-greaterthan-other="st_trandt" data-val-regex="轉帳終止日格式錯誤(格式：yyyy/mm/dd)" data-val-regex-pattern="^(19|20)\d\d/(((0[13578]|(10|12))/(0[1-9]|[1-2][0-9]|3[0-1]))|(02/(0[1-9]|[1-2][0-9]))|((0[469]|11)/(0[1-9]|[1-2][0-9]|30)))$" id="ed_trandt" name="ed_trandt" type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="st_trandt" data-valmsg-replace="true"></span>
-                        <span class="field-validation-valid" data-valmsg-for="ed_trandt" data-valmsg-replace="true"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 160px;" class="content_table_04_title">
                         清冊狀態
                     </td>
                     <td class="content_table_04_content">
                         <input class="" id="ProcSts" name="ProcSts" style="width:200px;display:none;" type="text" value="" />
                         <select class="" id="ProStsDDL" name="ProStsDDL"><option selected="selected" value="">請選擇</option>
-<option value="O">暫存</option>
-<option value="C">確認</option>
-<option value="D">作廢</option>
-<option value="Z">結報</option>
+<option value="O">通過</option>
+<option value="C">尚未通過</option>
 </select>
                     </td>
                 </tr>
@@ -371,13 +357,6 @@
         </tr>
         <tr>
             <td style="width: 50px;" class="content_table_03_title">造冊日</td>
-            <td class="content_table_04_content">
-                <span style="color: rgb(169, 25, 42); font-weight: bold; font-size: 1em;">
-                </span>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 50px;" class="content_table_03_title">轉帳日</td>
             <td class="content_table_04_content">
                 <span style="color: rgb(169, 25, 42); font-weight: bold; font-size: 1em;">
                 </span>
