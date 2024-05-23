@@ -1,234 +1,28 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>登入「愛政大」校園個人化入口-Login iNCCU Portal
-        2</title>
-    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-    <link href="css/reset.css" rel="stylesheet" type="text/css">
-    <!-- Picturefill.js , srcset,sizes !-->
-    <script src="js/picturefill.min.js" async></script>
-    <!-- Retina.js !-->
-    
-    <link href="./css/20230509/default_2023.css" rel="stylesheet" type="text/css">
-    <link href="./css/20230509/color_green.css" rel="stylesheet" type="text/css" id="colorCss">
-    <!-- custom theme javascript -->
-    <script type="text/javascript" src="js/theme.js"></script>
-
-    
-    <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!--[if (lt IE 10)&(!IEMobile)]>
-        <link href="css/ie8.css" rel="stylesheet" type="text/css">
-    <![endif]-->
-    <!-- Picturefill.js , srcset,sizes !-->
-    <script>
-        // Picture element HTML5 shiv
-        document.createElement("picture");
-    </script>
-  
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" href="style.css">
+    <title>Sign Page</title>
 </head>
 <body>
-    <div id="wrapper">
-        <form method="post" action="./Login.aspx" id="form1">
-<div class="aspNetHidden">
-<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
-<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNTQ2MTQ5OTkyDxYCHhNWYWxpZGF0ZVJlcXVlc3RNb2RlAgEWAgIBD2QWAgILD2QWBAIDDw8WAh4HVmlzaWJsZWhkFgICCQ8PFgIeBFRleHQFLOiri+i8uOWFpeWcqOS4iuWcluS4remhr+ekuuS5i+aVuOWtlygwfjkp44CCZGQCCQ88KwAKAQAPFgIeCFVzZXJOYW1lBQkxMTEzMDYwMDFkFgJmD2QWAgIDDw8WAh8CBQkxMTEzMDYwMDFkZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUXY2FwdGNoYSRMb2dpbjEkY2tiTG9naW7XuyiaimWCYiISqFL30daGhIZsPw==" />
-</div>
-
-<script type="text/javascript">
-//<![CDATA[
-var theForm = document.forms['form1'];
-if (!theForm) {
-    theForm = document.form1;
-}
-function __doPostBack(eventTarget, eventArgument) {
-    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
-        theForm.__EVENTTARGET.value = eventTarget;
-        theForm.__EVENTARGUMENT.value = eventArgument;
-        theForm.submit();
-    }
-}
-//]]>
-</script>
-
-
-<div class="aspNetHidden">
-
-	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="C2EE9ABB" />
-</div>
-        <header role="banner">
-           <picture>
-              <!--[if IE 9]><video style="display: none;"><![endif]-->
-               <source id="logo1" srcset="images/20230509/green/logo.png" media="(min-width:64em)" />
-               <source id="logo2" srcset="images/20230509/green/logoM.png" media="(min-width:48em)" />
-              <!--[if IE 9]></video><![endif]-->
-              <img id="logo3" srcset="images/20230509/green/logo.png" media="min-width:30em" alt="iNCCU愛政大" />
-          </picture>
-        </header>
-        <nav role="navigation">
-        <p>
-            <span class="index">
-                  <picture>
-                    <!--[if IE 9]><video style="display: none;"><![endif]-->
-                    <source srcset="images/20230509/icon_index.png" media="(min-width:48em)">
-                    <!--[if IE 9]></video><![endif]-->
-                    <img srcset="images/20230509/icon_indexM.png" media="min-width:30em" alt="icon">
-                  </picture>
-                  <a href="http://www.nccu.edu.tw/">
-                    政大首頁
-                  </a>
-              </span>
-              <span class="lang">
-                  <picture>
-                      <!--[if IE 9]><video style="display: none;"><![endif]-->
-                      <source srcset="images/20230509/icon_lang.png" media="(min-width:48em)">
-                      <!--[if IE 9]></video><![endif]-->
-                      <img srcset="images/20230509/icon_langM.png" media="min-width:30em" alt="icon">
-                  </picture>
-                   <a id="languageChange" href="javascript:__doPostBack(&#39;languageChange&#39;,&#39;&#39;)">English</a>
-              </span>
-        </p>
-    </nav>
-        
-<div id="login">
-    <div id="systemname">
-        
-    </div>
-    <div id="captcha" align="center">
-        
-    </div>
-    <span id="captcha_sessionCount"></span>
-    <div style="font-size: small; color: Red; text-align: left;">
-        <span id="captcha_ErrorMsg"></span>
-    </div>
-    <table id="captcha_Login1" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;">
-	<tr>
-		<td>
-            <div style="font-size: small; color: Red; text-align: left;">
-                <span id="captcha_Login1_FailureText" UserNameRequiredErrorMessage="請輸入帳號。" RememberMeText="記住我的帳號。" FailureText="您嘗試登入失敗，請再試一次，若輸入錯誤次數超過5次，您將被停權15分鐘。" PasswordLabelText="密碼:" LoginButtonText="登入" UserNameLabelText="帳號:" PasswordRequiredErrorMessage="請輸入密碼。"></span>
+    <div class="login-container">
+        <h2>Sign in </h2>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="username">User Name: </label>
+                <input type="text" id="username" name="username" required>
+                <label for="username">@nccu.edu.tw</label>
             </div>
-            <div id="username">
-                
-                <input name="captcha$Login1$UserName" value="111306001" id="captcha_Login1_UserName" type="text" placeholder="帳號/學號" />
-                <p class="sWord">
-                    @nccu.edu.tw
-                </p>
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password" required>
             </div>
-            <div id="password">
-                
-                <input name="captcha$Login1$Password" type="password" maxlength="32" id="captcha_Login1_Password" type="password" MinLength="8" placeholder="密碼" value="mq921013" />
-            </div>
-            <div id="rememberUser">
-                <label>
-                    <input id="captcha_Login1_ckbLogin" type="checkbox" name="captcha$Login1$ckbLogin" checked="checked" />
-                    <label for="captcha_Login1_ckbLogin">
-                        <span class="ssWord">
-                            記住我的帳號密碼</span></label>
-                </label>
-            </div>
-            <div id="log">
-                <a id="captcha_Login1_LoginButton" href="javascript:__doPostBack(&#39;captcha$Login1$LoginButton&#39;,&#39;&#39;)" style="text-decoration: none">登入</a>
-            </div>
-            <div id="help">
-                <a href="http://schwebap.nccu.edu.tw/LdapEar/login.aspx">
-                    建立帳戶
-                </a><a class="wrong" href="https://cc.nccu.edu.tw/p/426-1001-75.php">
-                    無法登入?
-                </a>
-            </div>
-            <input type="hidden" name="captcha$Login1$alertmsg" id="captcha_Login1_alertmsg" value="密碼長度最少8碼，按下確定後前往mail 2000更換密碼" />
-        </td>
-	</tr>
-</table>
-</div>
-
+            <button type="submit" class="submitbtn">Sign in </button>
+            <button type="submit" class="btn">Sign up </button>
+            <button type="submit" class="btn">Forget password? </button>
         </form>
     </div>
-    <!--/ div.wrapper !-->
-    
-    <div class="bottomimg">
-    </div>
-    <div class="bottomimgSide"></div>
-    
-    
-  
 </body>
-
-
-<script language="javascript" type="text/javascript">
-    $('#captcha_Login1_UserName').focus();
-    $(document).keypress(function (e) {
-        if (e.keyCode == 13) {
-            var login = document.getElementById('captcha_Login1_LoginButton');
-            window.location = login.href;
-        }
-    });
-
-    $(document).ready(adrandom);
-    var random = Math.floor(Math.random() * $('.adshow').length);
-    $(window).resize(adrandombg);
-    function adrandom() {	//random show #ad
-        $('.adshow').hide().eq(random).show();
-        adrandombg();
-    }
-    function adrandombg() {	//random show #ad
-        $('.adbg img').hide();
-        $('.adbg0 img').hide();
-        if ($(window).width() > 1023) {
-            $('.adbg0 img').delay(3000).fadeIn(800, 0);
-            $('.adbg img').hide().eq(random).delay(8000).fadeIn(800, 0);
-        }
-        else {
-            $('.adbg img').hide();
-            $('.adbg0 img').hide();
-        }
-    }
-
-    function showAlertMsg(msg) {
-        let check = confirm(msg);
-    }
-    function showAlertMsg(msg, link) {
-        let check = confirm(msg);
-
-        if (check) {
-            if (link != '') {
-                window.location.replace(link);
-            }
-        }
-    }
-
-    function showAlertMsg() {
-        let msg = document.getElementById('captcha_Login1_alertmsg').value;
-        let value = document.getElementById('captcha_Login1_Password').value;
-        if (value.length < 8) {
-            let check = confirm(msg);
-            return false;
-        }
-        else
-            return true;
-    }
-    function showAlertMsg(link) {
-        let msg = document.getElementById('captcha_Login1_alertmsg').value;
-        let value = document.getElementById('captcha_Login1_Password').value;
-
-        if (value.length < 8) {
-            let check = confirm(msg);
-            if (check) {
-                if (link != '') {
-                    document.location.assign(link);
-                }
-            }
-            return false;
-        }
-        else
-            return true;
-    }
-
-</script>
 </html>
