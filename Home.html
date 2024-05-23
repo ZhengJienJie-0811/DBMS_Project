@@ -7,33 +7,57 @@
         <title>Home Page</title>
     </head>
 <body>
-
-<table border="1">
-    <tr>
-        <th>Header 1</th>
-        <th>Header 2</th>
-    </tr>
-    <tr>
-        <td>Row 1, Cell 1</td>
-        <td>Row 1, Cell 2</td>
-    </tr>
-    <tr>
-        <td>Row 2, Cell 1</td>
-        <td>Row 2, Cell 2</td>
-    </tr>
-    <tr>
-        <td>Row 3, Cell 1</td>
-        <td>Row 3, Cell 2</td>
-    </tr>
-    <tr>
-        <td>Row 4, Cell 1</td>
-        <td>Row 4, Cell 2</td>
-    </tr>
-    <tr>
-        <td>Row 5, Cell 1</td>
-        <td>Row 5, Cell 2</td>
-    </tr>
-</table>
-
+    <div class="container">
+        <p>
+            Choose to 
+        </p>
+        <button type="submit" class="submitbtn">Add </button>
+        <p>
+            or
+        </p>
+        <button type="submit" class="submitbtn">Search </button>
+        <p>
+            Please enter search criteria! 
+        </p>
+        <table border="1">
+        <tr>
+            <th>Inventory number: </th>
+            <td>
+                <input type="text" id="inventoryNumber" name="inventoryNumber">
+            </td>
+        </tr>
+        <tr>
+            <th>Starting and ending date of registration: </th>
+            <td>
+                <input type="date" id="inventoryNumber" name="inventoryNumber">~
+                <input type="date" id="inventoryNumber" name="inventoryNumber">
+            </td>
+        </tr>
+        <tr>
+            <th>Starting and ending date of transfer: </th>
+            <td>
+                <input type="date" id="inventoryNumber" name="inventoryNumber">~
+                <input type="date" id="inventoryNumber" name="inventoryNumber">
+            </td>
+        </tr>
+        <tr>
+            <th>Inventory Status: </th>
+            <td>
+                <select>
+                    <option>temporary storage</option>
+                    <option>confirm</option>
+                    <option>void</option>
+                    <option>conclusion</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Keyword search: </th>
+            <td>
+                <input type="text" id="inventoryNumber" name="inventoryNumber">
+            </td>
+        </tr>
+    </table>
+    </div>
 </body>
 </html>
