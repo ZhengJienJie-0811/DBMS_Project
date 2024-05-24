@@ -51,4 +51,12 @@ input[type="password"] {
     border-radius: 4px;
     cursor: pointer;
 }   
-
+.btn2 {
+    width: 49%;
+    padding: 10px;
+    background-color: #0091ff83;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
