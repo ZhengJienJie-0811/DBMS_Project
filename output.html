@@ -5,6 +5,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Output</title>
+        <script>
+            function printPage() {
+                window.print();
+            }
+        </script>
     </head>
 <body>
     <div class="container">
@@ -88,7 +93,7 @@
             Accounting Office: 
             President: 
         </p>
-        <button type="submit">print</button>
+        <button onclick="printPage()">print</button>
     </div>
 </body>
 </html>
