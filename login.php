@@ -18,7 +18,7 @@ $account = $_POST['account'];
 $password = $_POST['password'];
 
 // 避免 SQL 注入
-$user = $conn->real_escape_string($user);
+$account = $conn->real_escape_string($account);
 $password = $conn->real_escape_string($password);
 
 // 查詢資料庫
@@ -32,6 +32,3 @@ if ($result->num_rows > 0) {
     // 登入失敗
     echo "用戶名或密碼錯誤。";
 }
-
-$conn->close();
-?>
