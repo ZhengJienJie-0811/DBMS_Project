@@ -2,7 +2,7 @@
 $servername = "localhost"; // MySQL 伺服器主機名稱
 $username = "root"; // MySQL 使用者名稱
 $password = ""; // MySQL 密碼
-$dbname = "records_db"; // 資料庫名稱
+$dbname = "DBMS_Project"; // 資料庫名稱
 
 // 建立連線
 $conn = new mysqli($servername, $username, $password, $dbname);
