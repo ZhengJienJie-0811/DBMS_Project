@@ -100,6 +100,10 @@
             President: 
         </p>
         <button onclick="printPage()">print</button>
+        <form action="delete.php" method="post">
+            <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+            <button type="submit">Delete</button>
+        </form
     </div>
 </body>
 </html>
