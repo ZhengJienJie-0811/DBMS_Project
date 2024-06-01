@@ -24,11 +24,11 @@
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $account = $_POST['account'];
+            $staff_ID = $_POST['staff_ID'];
             $password = $_POST['password'];
 
             // 驗證輸入
-            if (empty($account) || empty($password)) {
+            if (empty($staff_ID) || empty($password)) {
                 echo "<p style='color:red;'>帳號和密碼都是必填的。</p>";
             } else {
                 // 預備查詢
@@ -62,7 +62,6 @@
             <div class="form-group">
                 <label for="username">用戶名： </label>
                 <input type="text" id="account" name="account" required>
-                <label for="username">@nccu.edu.tw</label>
             </div>
             <div class="form-group">
                 <label for="password">密碼： </label>
