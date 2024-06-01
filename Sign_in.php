@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['user'] = $account;
                 $message = "<p style='color:green;'>登入成功！</p>";
-                header("Location: function.php");
+                header("Location:function.html");
                 exit();
             } else {
                 $message = "<p style='color:red;'>密碼錯誤。</p>";
