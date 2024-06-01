@@ -1,42 +1,62 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="C:\Users\owner\Desktop\DSBS FINAL PROJECT\Style.html">
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Search Plan</title>
     </head>
 <body>
     <div class="container">
-        <p>
-            Plan Search: 
-        </p>
-        <table border="1">
+        <form method="POST" action="SearchPlan.html">
+            <p>
+                Plan Search: 
+            </p>
+            <table border="1">
+            <tr>
+                <th>Plan number: </th>
+                <td>
+                    <input type="text" id="plan_number" name="plan_number">
+                </td>
+            </tr>
+            <tr>
+                <th>Unit: </th>
+                <td>
+                    <select>
+                        <option>commerce</option>
+                        <option>law</option>
+                        <option>education</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Keyword: </th>
+                <td>
+                    <input type="text" id="Keyword" name="Keyword">
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="submitbtn">Search </button>
         <tr>
             <th>Plan number: </th>
             <td>
-                <input type="text" id="plan_number" name="plan_number">
+                <? php>
+            </td>
+        </tr>
+        <tr>
+            <th>Plan name: </th>
+            <td>
+                <? php>
             </td>
         </tr>
         <tr>
             <th>Unit: </th>
             <td>
-                <select>
-                    <option>commerce</option>
-                    <option>law</option>
-                    <option>education</option>
-                </select>
+                <? php>
             </td>
         </tr>
-        <tr>
-            <th>Keyword: </th>
-            <td>
-                <input type="text" id="Keyword" name="Keyword">
-            </td>
-        </tr>
-    </table>
-    <button type="submit" class="submitbtn">Search </button>
-    <button type="submit" class="btn">Close </button>
+        </form>
+        
     </div>
 </body>
 </html>

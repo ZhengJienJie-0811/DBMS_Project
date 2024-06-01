@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,20 +9,21 @@
 </head>
 <body>
     <div class="container">
-        <form action="/login" method="post">
+        <form method="POST" action="Sign_up.php">
             <div class="form-group">
                 <p>
-                    Please enter the staff ID, default password and Verification code
+                    Please enter the staff ID and default password
                 </p>
             </div>
             <div class="form-group">
-                <label for="username">Staff ID: </label>
-                <input type="text" id="employee_number" name="Staff ID" required>
+                <label for="staff_id">Staff ID: </label>
+                <input type="text" id="staff_id" name="staff_id" required>
             </div>
             <div class="form-group">
                 <label for="password">Password: </label>
-                <input type="password" id="Password" name="Password" required>
+                <input type="password" id="password" name="password" required>
             </div>
+            <button type="submit" class="submitbtn">Register</button>
         </form>
     </div>
 </body>

@@ -11,47 +11,51 @@
         <p>
             Please enter the information below! 
         </p>
-        <table border="1">
-        <tr>
-            <th>Unit code: </th>
-            <td>
-                <select>
-                    <option>temporary storage</option>
-                    <option>confirm</option>
-                    <option>void</option>
-                    <option>conclusion</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>Date: </th>
-            <td>
-                <input type="print_date" id=" date" name="print_date">
-            </td>
-        </tr>
-        <tr>
-            <th>Title: </th>
-            <td>
-                <input type="text" id="title" name="title">
-            </td>
-        </tr>
-        <tr>
-            <th>Reason: </th>
-            <td>
-                <input type="text" id="reason" name="reason">
-            </td>
-        </tr>
-        <tr>
-            <th>Plan name: </th>
-            <td>
-                <input type="text" id="plan_name" name="plan_name">
-                <button type="submit" class="btn2">Add next plan</button>
-                <button type="submit" class="btn2">Search plan</button>
-            </td>
-        </tr>
-    </table>
-    <button type="submit" class="btn2">Build inventory</button>
-    <button type="submit" class="btn2">Back </button>
+        <form method="POST" action="Records.html">
+            <table border="1">
+            <tr>
+                <th>Unit code: </th>
+                <td>
+                    <select>
+                        <option>temporary storage</option>
+                        <option>confirm</option>
+                        <option>void</option>
+                        <option>conclusion</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Date: </th>
+                <td>
+                    <input type="print_date" id=" date" name="print_date">
+                </td>
+            </tr>
+            <tr>
+                <th>Title: </th>
+                <td>
+                    <input type="text" id="title" name="title">
+                </td>
+            </tr>
+            <tr>
+                <th>Reason: </th>
+                <td>
+                    <input type="text" id="reason" name="reason">
+                </td>
+            </tr>
+            <tr>
+                <th>Plan name: </th>
+                <td>
+                    <input type="text" id="plan_name" name="plan_name">
+                    <button type="submit" class="btn2">Add next plan</button>
+                    <button type="submit" class="btn2">Search plan</button>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="btn2">Build inventory</button>
+        </form>
+    <form method="POST" action="Home.html">
+        <button type="submit" class="btn2">Back </button>  
+    </form>
     </div>
 </body>
 </html>
