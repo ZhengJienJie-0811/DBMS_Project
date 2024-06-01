@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Output</title>
+    </head>
+<body>
+
+<div class="container">
+    <table>
+        <tr>
+            <td><label for="personnel">Personnel</label></td>
+            <td>
+                <select id="personnel">
+                    <option value="1">staff</option>
+                    <option value="1">student</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="id-number">Staff ID/Student ID</label></td>
+            <td><input type="text" id="id-number" placeholder="Maintenance of data for off-campus personnel"></td>
+        </tr>
+        <tr>
+            <td><label for="name">Name</label></td>
+            <td><input type="text" id="name"></td>
+        </tr>
+        <tr>
+            <td><label for="account">Account</label></td>
+            <td><input type="text" id="account"></td>
+        </tr>
+        <tr>
+            <td><label for="PayableDate">Payable Date</label></td>
+            <td>
+                <input type="date" id="PayableDate" name="PayableDate">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="item">Item</label></td>
+            <td>
+                <select id="item">
+                    <option value="0">0 Register</option>
+                    <option value="0">1 Other</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="section-title">Payable amount</td>
+        </tr>
+        <tr>
+            <td><label for="unitPrice">Unit price</label></td>
+            <td><input type="text" id="unitPrice"></td>
+        </tr>
+        <tr>
+            <td><label for="quantity">Quantity</label></td>
+            <td><input type="number" id="quantity" value="1"></td>
+        </tr>
+        <tr>
+            <td><label for="amount">Total amount</label></td>
+            <td><input type="text" id="amount"></td>
+        </tr>
+        <tr>
+            <td><label for="paymentAmount">Payment amount</label></td>
+            <td><input type="text" id="paymentAmount"></td>
+        </tr>
+        <tr>
+            <td><label for="remarks">Remarks</label></td>
+            <td><textarea id="remarks" rows="3"></textarea></td>
+        </tr>
+    </table>
+    <p><a href="ReceiptExplanation.html">Receipt Explanation</a></p>
+    <button type="submit" class="btn2">Submit</button>
+    <button type="delete" class="btn2">Delete</button>
+</div>
+
+</body>
+</html>
