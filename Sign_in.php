@@ -32,7 +32,7 @@
                 echo "<p style='color:red;'>帳號和密碼都是必填的。</p>";
             } else {
                 // 預備查詢
-                $stmt = $conn->prepare("SELECT password FROM users WHERE account = ?");
+                $stmt = $conn->prepare("SELECT password FROM user WHERE account = ?");
                 $stmt->bind_param("s", $account);
                 $stmt->execute();
                 $stmt->store_result();
