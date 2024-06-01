@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // 預備查詢
         $stmt = $conn->prepare("SELECT password FROM users WHERE Staff_ID = ?");
-        $stmt->bind_param("s", $account);
+        $stmt->bind_param("s", $staff_id);
         $stmt->execute();
         $stmt->store_result();
 
