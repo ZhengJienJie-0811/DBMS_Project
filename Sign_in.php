@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "<p style='color:red;'>帳號和密碼都是必填的。</p>";
     } else {
         // 預備查詢
-        $stmt = $conn->prepare("SELECT password FROM users WHERE staff_id = ?");
+        $stmt = $conn->prepare("SELECT password FROM user WHERE staff_id = ?");
         $stmt->bind_param("s", $staff_id);
         $stmt->execute();
         $stmt->store_result();
