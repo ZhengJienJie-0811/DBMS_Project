@@ -21,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // 驗證輸入
-    if (empty($account) || empty($password)) {
+    if (empty($staff_id) || empty($password)) {
         $message = "<p style='color:red;'>帳號和密碼都是必填的。</p>";
     } else {
         // 預備查詢
-        $stmt = $conn->prepare("SELECT password FROM users WHERE Staff_ID = ?");
+        $stmt = $conn->prepare("SELECT password FROM users WHERE staff_id = ?");
         $stmt->bind_param("s", $staff_id);
         $stmt->execute();
         $stmt->store_result();
@@ -36,9 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // 驗證密碼
             if (password_verify($password, $hashed_password)) {
-                $_SESSION['user'] = $account;
+                $_SESSION['user'] = $staff_id;
                 $message = "<p style='color:green;'>登入成功！</p>";
-                header("Location:function.html");
+                header("Location: function.html");
                 exit();
             } else {
                 $message = "<p style='color:red;'>密碼錯誤。</p>";
