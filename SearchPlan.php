@@ -16,15 +16,13 @@ $results = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $plan_number = $_POST['plan_number'];
-    $unit = $_POST['unit'];
     $keyword = $_POST['keyword'];
 
-    $sql = "SELECT * FROM plans WHERE plan_number LIKE ? AND unit LIKE ? AND keyword LIKE ?";
+    $sql = "SELECT * FROM plans WHERE plan_number LIKE ? AND keyword LIKE ?";
     $stmt = $conn->prepare($sql);
     $like_plan_number = "%" . $plan_number . "%";
-    $like_unit = "%" . $unit . "%";
     $like_keyword = "%" . $keyword . "%";
-    $stmt->bind_param("sss", $like_plan_number, $like_unit, $like_keyword);
+    $stmt->bind_param("sss", $like_plan_number, $like_keyword);
 
     $stmt->execute();
     $result = $stmt->get_result();
