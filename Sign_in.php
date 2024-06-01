@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $account = $_POST['account'];
+    $staff_id = $_POST['staff_id'];
     $password = $_POST['password'];
 
     // 驗證輸入
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "<p style='color:red;'>帳號和密碼都是必填的。</p>";
     } else {
         // 預備查詢
-        $stmt = $conn->prepare("SELECT password FROM users WHERE account = ?");
+        $stmt = $conn->prepare("SELECT password FROM users WHERE Staff_ID = ?");
         $stmt->bind_param("s", $account);
         $stmt->execute();
         $stmt->store_result();
