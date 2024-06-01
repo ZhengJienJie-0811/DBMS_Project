@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024-05-06 16:46:45
+-- 產生時間： 2024-06-01 16:49:08
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -81,10 +81,17 @@ CREATE TABLE `status` (
 --
 
 CREATE TABLE `user` (
-  `employee_number` varchar(50) NOT NULL,
-  `account` varchar(50) NOT NULL,
+  `staff_ID` varchar(50) NOT NULL,
   `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `user`
+--
+
+INSERT INTO `user` (`staff_ID`, `password`) VALUES
+('111306086', '$2y$10$28nlV.e0/XLbYXTQCX53j./2yBer8Gwe6nMPCV.e/lh'),
+('test', '$2y$10$xH58zcd57wDrMjZbz5FtPuxPgNlIPRXJ06M/TvQN8mB');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
