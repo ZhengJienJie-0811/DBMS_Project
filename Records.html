@@ -12,34 +12,38 @@
         <p>
             Please enter the information below! 
         </p>
-        <table border="1">
-        <tr>
-            <th>Plan Number: </th>
-            <td>
-                <input type="text" id="plan_number" name="plan_number">
-            </td>
-        </tr>
-        <tr>
-            <th>Budget subject: </th>
-            <td>
-                <input type="text" id="budget_number" name="budget_number">
-            </td>
-        </tr>
-        <tr>
-            <th>Document amount: </th>
-            <td>
-                <input type="text" id="document_amount" name="document_amount">
-            </td>
-        </tr>
-        <tr>
-            <th>Total amount: </th>
-            <td>
-                <input type="text" id="total_amount" name="total_amount">
-            </td>
-        </tr>
-    </table>
-    <button type="submit" class="submitbtn">Next</button>
-    <button type="submit" class="btn">Back </button>
+        <form method="POST" action="AddRecord.html">
+                <table border="1">
+            <tr>
+                <th>Plan Number: </th>
+                <td>
+                    <input type="text" id="plan_number" name="plan_number">
+                </td>
+            </tr>
+            <tr>
+                <th>Budget subject: </th>
+                <td>
+                    <input type="text" id="budget_number" name="budget_number">
+                </td>
+            </tr>
+            <tr>
+                <th>Document amount: </th>
+                <td>
+                    <input type="text" id="document_amount" name="document_amount">
+                </td>
+            </tr>
+            <tr>
+                <th>Total amount: </th>
+                <td>
+                    <input type="text" id="total_amount" name="total_amount">
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="submitbtn">Next</button>
+        </form>
+        <form method="POST" action="Add.html">
+            <button type="submit" class="btn">Back </button>
+        </form>
     </div>
 </body>
 </html>
