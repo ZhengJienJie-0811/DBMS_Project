@@ -24,7 +24,7 @@
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $staff_ID = $_POST['staff_ID'];
+            $staff_ID = $_POST['staff_id'];
             $password = $_POST['password'];
 
             // 驗證輸入
