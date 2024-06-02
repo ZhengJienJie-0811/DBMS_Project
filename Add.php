@@ -31,14 +31,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "The string does not contain the expected format.\n";
     }
 
-    function generateUUID() {
+    function generateDc() {
         $data = random_bytes(16);
         $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // 設置版本號為0100
         $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // 設置變種為10
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
+
+    function generateIn() {
+        $data = random_bytes(5);
+        $hexString = bin2hex($data);
+        $customString = substr($hexString, 0, 10);
+        return $customString;
+    }
     
-    $document_code = generateUUID();
+    $document_code = generateDc();
+    $inventory_number = generateIn();
 
 
     $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date) VALUES (?, ?, ?, ?, ?, ?)";
