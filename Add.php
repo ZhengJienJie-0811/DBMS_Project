@@ -18,14 +18,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reason = $_POST['reason'];
     $plan_name = $_POST['plan_name'];
 
-    $budget_subjet = 
-    $plan_number = 
-    $document_code = 
+    $budget_subjet = '';
+    $plan_number = ''; 
+    $document_code = '';
+    $inventory_number = '';
+    $underLine = '_';
+    $array = explode($underLine, $reason);
+    if (count($array) == 2) {
+        $plan_number = $array[0];
+        $budget_subject = $array[1];
+    }else{
+        echo "The string does not contain the expected format.\n";
+    }
+
+    function generateUUID() {
+        $data = random_bytes(16);
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // 設置版本號為0100
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // 設置變種為10
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    }
+    
+    $document_code = generateUUID();
 
 
-    $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $unit_code, $print_date, $title, $reason, $plan_name);
+    $stmt->bind_param("ssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date);
 
     if ($stmt->execute()) {
         echo "資料儲存成功";
