@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo"資料儲存成功";
+        header('Records.html')
     } else {
         echo "錯誤: " . $sql . "<br>" . $conn->error;
     }

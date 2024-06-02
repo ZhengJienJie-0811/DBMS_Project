@@ -45,27 +45,6 @@
         <p><a href="Records.html" target="_blank">Keeping list</a></p>
     </div>
     
-    <script>
-        document.getElementById('addForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // 阻止表单的默认提交行为
-
-            var form = this;
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', form.action, true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    window.location.href = 'Records.html'; // 成功提交后跳转到 Records.html
-                } else {
-                    console.error('An error occurred: ' + xhr.statusText);
-                }
-            };
-
-            var formData = new FormData(form);
-            var data = new URLSearchParams(formData).toString();
-            xhr.send(data);
-        });
-    </script>
+ 
 </body>
 </html>
