@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date);
 
     if ($stmt->execute()) {
-        header('Records.html');
+        header('Location:Records.html');
     } else {
         echo "錯誤: " . $sql . "<br>" . $conn->error;
     }
