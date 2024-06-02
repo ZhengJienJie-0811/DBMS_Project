@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: function.html");
                 exit();
             } else {
-                $message = "<p style='color:red;'>密碼錯誤。</p>";
+                echo"帳號/密碼錯誤";
             }
         } else {
             $message = "<p style='color:red;'>帳號不存在。</p>";
