@@ -20,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $purpose = $_POST['purpose'];
     $note = $_POST['note'];
 
-    $sql = "INSERT INTO receipts (date, invoice_number, total_amount_of_receipt, cost_category, purpose, note) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO receipts (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $date, $invoice_number, $total_amount_of_receipt, $cost_category, $purpose, $note);
+    $stmt->bind_param("ssssss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date);
 
     if ($stmt->execute()) {
         echo "資料儲存成功";
