@@ -1,25 +1,39 @@
+<?php
+session_start();
+$searchResults = isset($_SESSION['searchResults']) ? $_SESSION['searchResults'] : [];
+?>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="Style.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Records</title>
-    </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="Style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Records</title>
+</head>
 <body>
     <div class="container">
         <table border="1">
-        <tr>
-            <th>Date</th>
-            <th>Inventory number</th>
-            <th>Title</th>
-        </tr>
-        <tr>
-            <th><? php></th>
-            <th><? php></th>
-            <th><? php></th>
-        </tr>
-    </table>
+            <tr>
+                <th>Date</th>
+                <th>Inventory number</th>
+                <th>Title</th>
+            </tr>
+            <?php if (count($searchResults) > 
+                <?php foreach ($searchResults as $row): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['print_date']); ?></td>
+                        <td><?php echo htmlspecialchars($row['inventory_number']); ?></td>
+                        <td><?php echo htmlspecialchars($row['title']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="3">No results found.</td>
+                </tr>
+            <?php endif; ?>
+        </table>
+        <p><a href="function.html">Back to Search</a></p>
     </div>
 </body>
 </html>
