@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $purpose = $_POST['purpose'];
     $note = $_POST['note'];
 
-    $sql = "INSERT INTO receipts (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date);
 
