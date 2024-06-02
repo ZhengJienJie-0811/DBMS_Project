@@ -41,7 +41,7 @@ if (!empty($_POST['inventory_status'])) {
     $types .= "s";
 }
 if (!empty($_POST['keyword'])) {
-    $conditions[] = "(title LIKE ? OR reason LIKE ? OR plan_name LIKE ?)";
+    $conditions[] = "(title LIKE ? OR reason LIKE ? OR plan_name LIKE ? OR budget_subject LIKE ?)";
     $keyword = "%" . $_POST['keyword'] . "%";
     $params[] = $keyword;
     $params[] = $keyword;
