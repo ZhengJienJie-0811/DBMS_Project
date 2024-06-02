@@ -13,13 +13,17 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $unit_code = $_POST['unit_code'];
     $print_date = $_POST['print_date'];
     $title = $_POST['title'];
     $reason = $_POST['reason'];
     $plan_name = $_POST['plan_name'];
 
-    $sql = "INSERT INTO inventory (unit_code, print_date, title, reason, plan_name) VALUES (?, ?, ?, ?, ?)";
+    $budget_subjet = 
+    $plan_number = 
+    $document_code = 
+
+
+    $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssss", $unit_code, $print_date, $title, $reason, $plan_name);
 
