@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $stmt->store_result();
 
+        // 檢查用戶是否存在
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($hashed_password);
             $stmt->fetch();
@@ -37,11 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // 驗證密碼
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['user'] = $staff_id;
-                $message = "<p style='color:green;'>登入成功！</p>";
                 header("Location: function.html");
                 exit();
             } else {
-                echo"帳號/密碼錯誤";
+                $message = "<p style='color:red;'>帳號或密碼錯誤。</p>";
             }
         } else {
             $message = "<p style='color:red;'>帳號不存在。</p>";
