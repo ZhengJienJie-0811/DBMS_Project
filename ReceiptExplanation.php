@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date);
+    $stmt->bind_param("sssiss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date);
 
     if ($stmt->execute()) {
         echo "資料儲存成功";
