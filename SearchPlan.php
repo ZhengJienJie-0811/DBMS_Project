@@ -15,19 +15,29 @@ if ($conn->connect_error) {
 $planName = isset($_GET['plan_name']) ? $_GET['plan_name'] : '';
 $planNumber = isset($_GET['plan_number']) ? $_GET['plan_number'] : '';
 
-$sql = "SELECT * FROM plan WHERE 1=1";
+$sql = "SELECT * FROM plan WHERE ";
 $params = [];
 $types = '';
 
-if (!empty($planName)) {
-    $sql .= " AND plan_name LIKE ?";
+if (!empty($planName) and empty($planNumber)) {
+    $sql .= "plan_name LIKE ?";
     $params[] = "%".$planName."%";
     $types .= 's';
 }
-if (!empty($planNumber)) {
-    $sql .= " AND plan_number LIKE ?";
+if (!empty($planNumber) and empty($planName)) {
+    $sql .= "plan_number LIKE ?";
     $params[] = "%".$planNumber."%";
     $types .= 's';
+}
+
+if(!empty($planName) and !empty($planNumber)){
+    $sql .= "plan_number LIKE ? and plan_name LIKE ?";
+    $params[] = "%".$planNumber."%";
+    $types .= 's';
+}
+
+if(empty($planName) and empty($planNumber)){
+    echo"請輸入搜尋條件";
 }
 
 $stmt = $conn->prepare($sql);
