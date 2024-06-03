@@ -17,42 +17,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $staff_id = $_POST['staff_id'];
     $password = $_POST['password'];
 
-    // 密碼加密
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // 檢查帳號是否已存在
+    $check_sql = "SELECT * FROM user WHERE staff_id = ?";
+    $check_stmt = $conn->prepare($check_sql);
+    $check_stmt->bind_param("s", $staff_id);
+    $check_stmt->execute();
+    $check_result = $check_stmt->get_result();
 
-    $sql = "INSERT INTO user (staff_id, password) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $staff_id, $hashed_password);
-
-    if ($stmt->execute()) {
-        echo  "<html lang='en'>
-        <head>
-            <meta charset='UTF-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <title>Registration Success</title>
-            <style>
-                body { font-family: Arial, sans-serif; }
-                .container { text-align: center; margin-top: 50px; }
-                .btn { display: inline-block; padding: 10px 20px; font-size: 16px; text-decoration: none; color: white; background-color: #4CAF50; border: none; border-radius: 5px; }
-                .btn:hover { background-color: #45a049; }
-            </style>
-        </head>
-        <body>
-            <div class='container'>
-                <h1>已成功註冊</h1>
-                <p>請點選按鈕回到登入頁面</p>
-                <form method='POST' action='index.html'>
-                    <button type='submit' class='btn'>返回</button>
-                </form>
-            </div>
-        </body>
-        </html>";
-
+    if ($check_result->num_rows > 0) {
+        echo "錯誤: 帳號已存在。";
     } else {
-        echo "錯誤: " . $sql . "<br>" . $conn->error;
+        // 密碼加密
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO user (staff_id, password) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $staff_id, $hashed_password);
+
+        if ($stmt->execute()) {
+            echo  "<html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Registration Success</title>
+                <style>
+                    body { font-family: Arial, sans-serif; }
+                    .container { text-align: center; margin-top: 50px; }
+                    .btn { display: inline-block; padding: 10px 20px; font-size: 16px; text-decoration: none; color: white; background-color: #4CAF50; border: none; border-radius: 5px; }
+                    .btn:hover { background-color: #45a049; }
+                </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <h1>已成功註冊</h1>
+                    <p>請點選按鈕回到登入頁面</p>
+                    <form method='POST' action='index.html'>
+                        <button type='submit' class='btn'>返回</button>
+                    </form>
+                </div>
+            </body>
+            </html>";
+        } else {
+            echo "錯誤: " . $sql . "<br>" . $conn->error;
+        }
+
+        $stmt->close();
     }
 
-    $stmt->close();
+    $check_stmt->close();
 }
 
 $conn->close();
