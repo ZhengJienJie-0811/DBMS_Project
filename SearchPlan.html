@@ -1,48 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Plan</title>
+    <title>計劃搜尋</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#searchForm').submit(function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: 'search.php',
+                    data: $(this).serialize(),
+                    success: function(response){
+                        $('#results').html(response);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-    <div class="container">
-        <form method="POST" action="SearchPlan.php">
-            <p>Plan Search:</p>
-            <table border="1">
-                <tr>
-                    <th>Plan number:</th>
-                    <td>
-                        <input type="text" id="plan_number" name="plan_number">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Keyword:</th>
-                    <td>
-                        <input type="text" id="Keyword" name="Keyword">
-                    </td>
-                </tr>
-            </table>
-            <button type="submit" class="submitbtn">Search</button>
-        </form>
+    <form id="searchForm">
+        計劃編號: <input type="text" name="plan_number">
+        關鍵字: <input type="text" name="Keyword">
+        <input type="submit" value="搜尋">
+    </form>
 
-        <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && count($plans) > 
-            <table border="1">
-                <tr>
-                    <th>Plan number</th>
-                    <th>Plan name</th>
-                </tr>
-                <?php foreach ($plans as $plan): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($plan['plan_number']); ?></td>
-                        <td><?php echo htmlspecialchars($plan['plan_name']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        <?php elseif ($_SERVER["REQUEST_METHOD"] == "POST"): ?>
-            <p>No plans found.</p>
-        <?php endif; ?>
+    <div id="results">
+        <!-- 搜尋結果將顯示在這裡 -->
     </div>
 </body>
 </html>
