@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 驗證輸入
     if (empty($staff_id) || empty($password)) {
-        $message = "<p style='color:red;'>帳號和密碼都是必填的。</p>";
+        $message = "帳號和密碼都是必填的。";
     } else {
         // 預備查詢
         $stmt = $conn->prepare("SELECT password FROM user WHERE staff_id = ?");
@@ -41,16 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: function.html");
                 exit();
             } else {
-                $message = "<p style='color:red;'>帳號或密碼錯誤。</p>";
+                $message = "帳號或密碼錯誤。";
             }
         } else {
-            $message = "<p style='color:red;'>帳號不存在。</p>";
+            $message = "帳號不存在。";
         }
 
         $stmt->close();
     }
 }
-
-// 關閉連接
-$conn->close();
-?>
