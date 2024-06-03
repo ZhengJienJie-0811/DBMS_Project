@@ -14,11 +14,11 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $plan_number = $_POST['plan_number'];
-    $budget_number = $_POST['budget_number'];
+    $budget_subject = $_POST['budget_subject'];
     $document_amount = $_POST['document_amount'];
     $total_amount = $_POST['total_amount'];
 
-    $sql = "INSERT INTO receipt_keeping_list (total_amount,plan_number,budget_subject,document_amount) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO receipt_keeping_list (total_amount, plan_number, budget_subject, document_amount) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("issi", $plan_number, $budget_number, $document_amount, $total_amount);
 
