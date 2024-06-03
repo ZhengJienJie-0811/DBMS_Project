@@ -23,7 +23,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssdd", $plan_number, $budget_number, $document_amount, $total_amount);
 
     if ($stmt->execute()) {
-        echo "新紀錄新增成功";
+        echo  "<html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Registration Success</title>
+            <style>
+                body { font-family: Arial, sans-serif; }
+                .container { text-align: center; margin-top: 50px; }
+                .btn { display: inline-block; padding: 10px 20px; font-size: 16px; text-decoration: none; color: white; background-color: #4CAF50; border: none; border-radius: 5px; }
+                .btn:hover { background-color: #45a049; }
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <h1>儲存成功</h1>
+                <p>請點選按鈕到下一步</p>
+                <form method='POST' action='RecordExplanation.html'>
+                    <button type='submit' class='btn'>返回</button>
+                </form>
+            </div>
+        </body>
+        </html>";
+
     } else {
         echo "錯誤: " . $sql . "<br>" . $conn->error;
     }
