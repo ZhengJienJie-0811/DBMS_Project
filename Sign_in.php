@@ -6,16 +6,12 @@ $username = "root";
 $password = "";
 $dbname = "DBMS_Project";
 
-// 启用错误报告
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// 建立连接
+// 建立連接
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// 检查连接
+// 檢查連接
 if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
+    die("連接失敗: " . $conn->connect_error);
 }
 
 $message = "";
@@ -24,33 +20,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $staff_id = $_POST['staff_id'];
     $password = $_POST['password'];
 
-    // 验证输入
+    // 驗證輸入
     if (empty($staff_id) || empty($password)) {
-        $message = "账号和密码都是必填的。";
+        $message = "<p style='color:red;'>帳號和密碼都是必填的。</p>";
     } else {
-        // 预备查询
+        // 預備查詢
         $stmt = $conn->prepare("SELECT password FROM user WHERE staff_id = ?");
         $stmt->bind_param("s", $staff_id);
         $stmt->execute();
         $stmt->store_result();
 
-        // 检查用户是否存在
+        // 檢查用戶是否存在
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($hashed_password);
             $stmt->fetch();
 
-            // 验证密码
+            // 驗證密碼
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['user'] = $staff_id;
                 header("Location: function.html");
                 exit();
             } else {
-                $message = "账号或密码错误。";
+                $message = "<p style='color:red;'>帳號或密碼錯誤。</p>";
             }
         } else {
-            $message = "账号不存在。";
+            $message = "<p style='color:red;'>帳號不存在。</p>";
         }
 
         $stmt->close();
     }
 }
+
+// 關閉連接
+$conn->close();
+?>
