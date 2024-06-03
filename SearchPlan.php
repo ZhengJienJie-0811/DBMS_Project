@@ -12,72 +12,51 @@ if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
 
-$plan_number = isset($_POST['plan_number']) ? $_POST['plan_number'] : '';
-$keyword = isset($_POST['Keyword']) ? $_POST['Keyword'] : '';
-
-$sql = "SELECT plan_number, plan_name FROM plan WHERE plan_number LIKE ? OR plan_name LIKE ?";
-$stmt = $conn->prepare($sql);
-$searchPlanNumber = '%' . $plan_number . '%';
-$searchKeyword = '%' . $keyword . '%';
-$stmt->bind_param('ss', $searchPlanNumber, $searchKeyword);
-$stmt->execute();
-$result = $stmt->get_result();
-
 $plans = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $plans[] = $row;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $plan_number = isset($_POST['plan_number']) ? $_POST['plan_number'] : '';
+    $keyword = isset($_POST['Keyword']) ? $_POST['Keyword'] : '';
+
+    $sql = "SELECT plan_number, plan_name FROM plan WHERE plan_number LIKE ? OR plan_name LIKE ?";
+    $stmt = $conn->prepare($sql);
+
+    // 檢查是否成功準備 SQL 語句
+    if ($stmt === false) {
+        die("準備 SQL 語句失敗: " . $conn->error);
     }
+
+    $searchPlanNumber = '%' . $plan_number . '%';
+    $searchKeyword = '%' . $keyword . '%';
+    $stmt->bind_param('ss', $searchPlanNumber, $searchKeyword);
+
+    // 檢查是否成功綁定參數
+    if ($stmt->bind_param('ss', $searchPlanNumber, $searchKeyword) === false) {
+        die("綁定參數失敗: " . $stmt->error);
+    }
+
+    $stmt->execute();
+
+    // 檢查是否成功執行語句
+    if ($stmt->execute() === false) {
+        die("執行語句失敗: " . $stmt->error);
+    }
+
+    $result = $stmt->get_result();
+
+    // 檢查是否成功獲取結果
+    if ($result === false) {
+        die("獲取結果失敗: " . $stmt->error);
+    }
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $plans[] = $row;
+        }
+    }
+
+    $stmt->close();
 }
 
 $conn->close();
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Plan</title>
-</head>
-<body>
-    <div class="container">
-        <form method="POST" action="SearchPlan.php">
-            <p>Plan Search:</p>
-            <table border="1">
-                <tr>
-                    <th>Plan number:</th>
-                    <td>
-                        <input type="text" id="plan_number" name="plan_number">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Keyword:</th>
-                    <td>
-                        <input type="text" id="Keyword" name="Keyword">
-                    </td>
-                </tr>
-            </table>
-            <button type="submit" class="submitbtn">Search</button>
-        </form>
-
-        <?php if (isset($plans) && count($plans) > 0): ?>
-            <table border="1">
-                <tr>
-                    <th>Plan number</th>
-                    <th>Plan name</th>
-                </tr>
-                <?php foreach ($plans as $plan): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($plan['plan_number']); ?></td>
-                        <td><?php echo htmlspecialchars($plan['plan_name']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        <?php elseif (isset($plans)): ?>
-            <p>No plans found.</p>
-        <?php endif; ?>
-    </div>
-</body>
-</html>
