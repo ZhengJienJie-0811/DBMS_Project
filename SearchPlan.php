@@ -1,53 +1,48 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "DBMS_Project";
+$servername = "your_servername";
+$username = "your_username";
+$password = "your_password";
+$dbname = "plan";
 
-    // 檢查是否成功執行語句
-    if ($stmt->execute() === false) {
-        die("執行語句失敗: " . $stmt->error);
-    }
-// 建立連線
+// 創建連接
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-    $result = $stmt->get_result();
-// 檢查連線
+// 檢查連接
 if ($conn->connect_error) {
-    die("連線失敗: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-    // 檢查是否成功獲取結果
-    if ($result === false) {
-        die("獲取結果失敗: " . $stmt->error);
-    }
-$plans = [];
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $plan_number = isset($_POST['plan_number']) ? $_POST['plan_number'] : '';
-    $keyword = isset($_POST['Keyword']) ? $_POST['Keyword'] : '';
+$planName = isset($_GET['plan_name']) ? $_GET['plan_name'] : '';
+$planNumber = isset($_GET['plan_number']) ? $_GET['plan_number'] : '';
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $plans[] = $row;
-    if (!empty($plan_number) || !empty($keyword)) {
-        $sql = "SELECT plan_number, plan_name FROM plans WHERE plan_number LIKE ? OR plan_name LIKE ?";
-        $stmt = $conn->prepare($sql);
-        $searchPlanNumber = '%' . $plan_number . '%';
-        $searchKeyword = '%' . $keyword . '%';
-        $stmt->bind_param('ss', $searchPlanNumber, $searchKeyword);
-        $stmt->execute();
-        $result = $stmt->get_result();
+$sql = "SELECT * FROM plans WHERE 1=1";
+$params = [];
+$types = '';
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $plans[] = $row;
-            }
-        }
-    }
-
-    $stmt->close();
-    }
-    }
+if (!empty($planName)) {
+    $sql .= " AND plan_name LIKE ?";
+    $params[] = "%".$planName."%";
+    $types .= 's';
 }
+if (!empty($planNumber)) {
+    $sql .= " AND plan_number LIKE ?";
+    $params[] = "%".$planNumber."%";
+    $types .= 's';
+}
+
+$stmt = $conn->prepare($sql);
+
+if ($types && $params) {
+    $stmt->bind_param($types, ...$params);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    echo "<p>Plan Name: " . htmlspecialchars($row['plan_name']) . "<br>Plan Number: " . htmlspecialchars($row['plan_number']) . "</p>";
+}
+
+$stmt->close();
 $conn->close();
 ?>
