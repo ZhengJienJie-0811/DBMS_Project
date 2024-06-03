@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $keyword = isset($_POST['Keyword']) ? $_POST['Keyword'] : '';
 
     if (!empty($plan_number) || !empty($keyword)) {
-        $sql = "SELECT plan_number, plan_name FROM plans WHERE plan_number LIKE ? OR plan_name LIKE ?";
+        $sql = "SELECT plan_number, plan_name FROM plan WHERE plan_number LIKE ? OR plan_name LIKE ?";
         $stmt = $conn->prepare($sql);
         $searchPlanNumber = '%' . $plan_number . '%';
         $searchKeyword = '%' . $keyword . '%';
