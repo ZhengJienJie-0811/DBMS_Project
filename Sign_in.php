@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -38,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // 驗證密碼
             if (password_verify($password, $hashed_password)) {
                 header("Location: function.html");
-                $_SESSION['user'] = $staff_id;
                 exit();
             } else {
                 $message = "<p style='color:red;'>帳號或密碼錯誤。</p>";
