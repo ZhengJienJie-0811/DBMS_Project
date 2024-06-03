@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "111306034";
-$password = "5y20d";
+$username = "root";
+$password = "";
 $dbname = "DBMS_Project";
 
 // 創建連接
