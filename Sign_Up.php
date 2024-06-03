@@ -39,10 +39,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </head>
         <body>
             <div class='container'>
-                <h1>Registration Successful</h1>
-                <p>You have successfully registered.</p>
+                <h1>已成功註冊</h1>
+                <p>請點選按鈕回到登入頁面</p>
                 <form method='POST' action='index.html'>
-                    <button type='submit' class='btn'>Back</button>
+                    <button type='submit' class='btn'>返回</button>
                 </form>
             </div>
         </body>
