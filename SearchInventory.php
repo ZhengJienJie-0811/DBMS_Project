@@ -19,7 +19,7 @@ $types = "";
 
 // 收集查询条件
 if (!empty($_POST['inventory_Number'])) {
-    $conditions[] = "inventory_number = ?";
+    $conditions[] = "inventory_Number = ?";
     $params[] = $_POST['inventory_Number'];
     $types .= "s";
 }
