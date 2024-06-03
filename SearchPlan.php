@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 $planName = isset($_GET['plan_name']) ? $_GET['plan_name'] : '';
 $planNumber = isset($_GET['plan_number']) ? $_GET['plan_number'] : '';
 
-$sql = "SELECT * FROM plans WHERE 1=1";
+$sql = "SELECT * FROM plan WHERE 1=1";
 $params = [];
 $types = '';
 
