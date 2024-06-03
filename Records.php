@@ -39,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class='container'>
                 <h1>儲存成功</h1>
                 <p>請點選按鈕到下一步</p>
-                <form method='POST' action='RecordExplanation.html'>
-                    <button type='submit' class='btn'>返回</button>
+                <form method='POST' action='ReceiptExplanation.html'>
+                    <button type='submit' class='btn'>Next</button>
                 </form>
             </div>
         </body>
