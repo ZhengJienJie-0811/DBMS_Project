@@ -21,17 +21,21 @@
     </script>
 </head>
 <body>
-    <form onsubmit="event.preventDefault(); searchPlan();">
-        <label for="plan_name">Plan Name:</label>
-        <input type="text" id="plan_name" name="plan_name">
-        <br>
-        <label for="plan_number">Plan Number:</label>
-        <input type="text" id="plan_number" name="plan_number">
-        <br>
-        <button type="submit">Search</button>
-        
-    </form>
+    <div class="container">
+        <form onsubmit="event.preventDefault(); searchPlan();">
+            <label for="plan_name">Plan Name:</label>
+            <input type="text" id="plan_name" name="plan_name">
+            <br>
+            <label for="plan_number">Plan Number:</label>
+            <input type="text" id="plan_number" name="plan_number">
+            <br>
+            <button type="submit" class="btn">Search</button>
+            <button onclick="window.location.href='Add.html'" class="btn2">上一頁</button>
+        </form>
+    </div>
+    
+    
     <div id="results"></div>
-    <button onclick="window.location.href='Add.html'">上一頁</button>
+    
 </body>
 </html>
