@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($stored_password);
             $stmt->fetch();
-            echo "Stored Password from DB: " . $stored_password . "<br>";
+            
 
             // 验证密码
             if ($password == $stored_password) { // 直接比较密码
