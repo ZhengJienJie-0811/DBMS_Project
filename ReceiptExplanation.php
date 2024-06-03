@@ -40,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <body>
             <div class='container'>
                 <h1>儲存成功</h1>
-                <p>請點選按鈕進行下一步</p>
-                <form method='POST' action='AddRecord.html'>
+                <p>請點選按鈕返回</p>
+                <form method='POST' action='function.html'>
                     <button type='submit' class='btn'>返回</button>
                 </form>
             </div>
