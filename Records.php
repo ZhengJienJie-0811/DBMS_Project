@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "INSERT INTO receipt_keeping_list (total_amount,plan_number,budget_subject,document_amount) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssdd", $plan_number, $budget_number, $document_amount, $total_amount);
+    $stmt->bind_param("issi", $plan_number, $budget_number, $document_amount, $total_amount);
 
     if ($stmt->execute()) {
         echo  "<html lang='en'>
