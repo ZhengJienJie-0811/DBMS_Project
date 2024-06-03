@@ -12,7 +12,6 @@ if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
 
-<?php
 $servername = "localhost";
 $username = "root";
 $password = "";
