@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "註冊成功";
-        header('Location:index.html');
+        
     } else {
         echo "錯誤: " . $sql . "<br>" . $conn->error;
     }
