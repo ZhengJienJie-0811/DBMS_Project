@@ -26,12 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 验证输入
     if (empty($staff_id) || empty($password)) {
-        $message = "帳號與密碼都是必填的。";
+        $message = "账号和密码都是必填的。";
     } else {
         // 预备查询
         $stmt = $conn->prepare("SELECT password FROM user WHERE staff_id = ?");
         if ($stmt === false) {
-            die("預備查詢失敗: " . $conn->error);
+            die("预备查询失败: " . $conn->error);
         }
         $stmt->bind_param("s", $staff_id);
         $stmt->execute();
@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // 检查用户是否存在
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($hashed_password);
+            $stmt->bind_result($stored_password);
             $stmt->fetch();
-            echo "Hashed Password from DB: " . $hashed_password . "<br>";
+            echo "Stored Password from DB: " . $stored_password . "<br>";
 
             // 验证密码
-            if (password_verify($password, $hashed_password)) {
+            if ($password == $stored_password) { // 直接比较密码
                 $_SESSION['user'] = $staff_id;
                 echo "Password verification successful.<br>";
                 // 确保没有输出在 header 前
@@ -52,11 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: function.html");
                 exit();
             } else {
-                $message = "帳號或密碼錯誤。";
+                $message = "账号或密码错误。";
                 echo $message . "<br>";
             }
         } else {
-            $message = "帳號不存在。";
+            $message = "账号不存在。";
             echo $message . "<br>";
         }
 

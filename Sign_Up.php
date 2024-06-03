@@ -28,11 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "錯誤: 帳號已存在。";
     } else {
         // 密碼加密
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        
 
         $sql = "INSERT INTO user (staff_id, password) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $staff_id, $hashed_password);
+        $stmt->bind_param("ss", $staff_id, $password);
 
         if ($stmt->execute()) {
             echo  "<html lang='en'>
