@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->store_result();
 
         // 检查用户是否存在
-        if ($stmt->num_rows > 0) {
+        if ($stmt->num_rows > 1) {
             $stmt->bind_result($hashed_password);
             $stmt->fetch();
 
