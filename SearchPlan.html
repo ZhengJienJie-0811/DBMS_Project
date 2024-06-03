@@ -21,22 +21,13 @@
 </head>
 <body>
     <form onsubmit="event.preventDefault(); searchPlan();">
-        <p>Plan Search:</p>
-        <table border="1">
-            <tr>
-                <th>Plan number:</th>
-                <td>
-                    <input type="text" id="plan_number" name="plan_number">
-                </td>
-            </tr>
-            <tr>
-                <th>Keyword:</th>
-                <td>
-                    <input type="text" id="Keyword" name="Keyword">
-                </td>
-            </tr>
-        </table>
-        <button type="submit" class="submitbtn">Search</button>
+        <label for="plan_name">Plan Name:</label>
+        <input type="text" id="plan_name" name="plan_name">
+        <br>
+        <label for="plan_number">Plan Number:</label>
+        <input type="text" id="plan_number" name="plan_number">
+        <br>
+        <button type="submit">Search</button>
     </form>
     <div id="results"></div>
 </body>
