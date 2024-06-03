@@ -26,12 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 验证输入
     if (empty($staff_id) || empty($password)) {
-        $message = "账号和密码都是必填的。";
+        $message = "帳號與密碼都是必填的。";
     } else {
         // 预备查询
         $stmt = $conn->prepare("SELECT password FROM user WHERE staff_id = ?");
         if ($stmt === false) {
-            die("预备查询失败: " . $conn->error);
+            die("預備查詢失敗: " . $conn->error);
         }
         $stmt->bind_param("s", $staff_id);
         $stmt->execute();
@@ -52,11 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: function.html");
                 exit();
             } else {
-                $message = "账号或密码错误。";
+                $message = "帳號或密碼錯誤。";
                 echo $message . "<br>";
             }
         } else {
-            $message = "账号不存在。";
+            $message = "帳號不存在。";
             echo $message . "<br>";
         }
 

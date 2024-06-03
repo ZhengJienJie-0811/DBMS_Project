@@ -67,7 +67,7 @@ if ($stmt) {
 
     $stmt->close();
 } else {
-    die("查询失败: " . $conn->error);
+    die("查詢失敗: " . $conn->error);
 }
 
 $conn->close();
