@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $document_amount = $_POST['document_amount'];
     $total_amount = $_POST['total_amount'];
 
-    $sql = "INSERT INTO records (plan_number, budget_number, document_amount, total_amount) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO receipt_keeping_list (total_amount,plan_number,budget_subject,document_amount) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssdd", $plan_number, $budget_number, $document_amount, $total_amount);
 
@@ -33,50 +33,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Records</title>
-</head>
-<body>
-    <div class="container">
-        <p>
-            請輸入以下資訊！
-        </p>
-        <form method="POST" action="Record.php">
-            <table border="1">
-                <tr>
-                    <th>計畫編號：</th>
-                    <td>
-                        <input type="text" id="plan_number" name="plan_number" required>
-                    </td>
-                </tr>
-                <tr>
-                    <th>預算科目：</th>
-                    <td>
-                        <input type="text" id="budget_number" name="budget_number" required>
-                    </td>
-                </tr>
-                <tr>
-                    <th>文件金額：</th>
-                    <td>
-                        <input type="number" step="0.01" id="document_amount" name="document_amount" required>
-                    </td>
-                </tr>
-                <tr>
-                    <th>總金額：</th>
-                    <td>
-                        <input type="number" step="0.01" id="total_amount" name="total_amount" required>
-                    </td>
-                </tr>
-            </table>
-            <button type="submit" class="submitbtn">下一步</button>
-            <button type="button" class="btn" onclick="history.back();">返回</button>
-        </form>
-    </div>
-</body>
-</html>
