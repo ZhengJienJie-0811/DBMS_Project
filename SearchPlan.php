@@ -1,8 +1,8 @@
 <?php
-$servername = "your_servername";
-$username = "your_username";
-$password = "your_password";
-$dbname = "plan";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "DBMS_Project";
 
 // 創建連接
 $conn = new mysqli($servername, $username, $password, $dbname);
