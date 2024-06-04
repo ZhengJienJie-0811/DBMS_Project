@@ -1,80 +1,73 @@
 <?php
-$servername = "localhost"; // MySQL 伺服器主機名稱
-$username = "root"; // MySQL 使用者名稱
-$password = ""; // MySQL 密碼
-$dbname = "DBMS_Project"; // 資料庫名稱
+session_start();
 
-// 建立連線
+// 從表單中接收數據
+$inventory_Number = isset($_POST['inventory_Number']) ? $_POST['inventory_Number'] : '';
+$regi_starting_date = isset($_POST['regi_starting_date']) ? $_POST['regi_starting_date'] : '';
+$regi_ending_date = isset($_POST['regi_ending_date']) ? $_POST['regi_ending_date'] : '';
+$tran_starting_date = isset($_POST['tran_starting_date']) ? $_POST['tran_starting_date'] : '';
+$tran_ending_date = isset($_POST['tran_ending_date']) ? $_POST['tran_ending_date'] : '';
+$inventory_status = isset($_POST['inventory_status']) ? $_POST['inventory_status'] : '';
+$keyword = isset($_POST['keyword']) ? $_POST['keyword'] : '';
+
+// 連接數據庫
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "DBMS_Project";
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// 檢查連線
 if ($conn->connect_error) {
-    die("連線失敗: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// 初始化查询条件
+// 構建查詢語句
+$sql = "SELECT print_date, inventory_number, title FROM Inventory WHERE 1=1";
+
 $conditions = [];
-$params = [];
-$types = "";
 
-// 收集查询条件
-if (!empty($_POST['inventory_Number'])) {
-    $conditions[] = "inventory_Number = ?";
-    $params[] = $_POST['inventory_Number'];
-    $types .= "s";
-}
-if (!empty($_POST['regi_starting_date']) && !empty($_POST['regi_ending_date'])) {
-    $conditions[] = "print_date BETWEEN ? AND ?";
-    $params[] = $_POST['regi_starting_date'];
-    $params[] = $_POST['regi_ending_date'];
-    $types .= "ss";
-}
-if (!empty($_POST['tran_starting_date']) && !empty($_POST['tran_ending_date'])) {
-    $conditions[] = "transfer_date BETWEEN ? AND ?";
-    $params[] = $_POST['tran_starting_date'];
-    $params[] = $_POST['tran_ending_date'];
-    $types .= "ss";
-}
-if (!empty($_POST['inventory_status'])) {
-    $conditions[] = "status = ?";
-    $params[] = $_POST['inventory_status'];
-    $types .= "s";
-}
-if (!empty($_POST['keyword'])) {
-    $conditions[] = "(title LIKE ? OR reason LIKE ? OR plan_name LIKE ? OR budget_subject LIKE ?)";
-    $keyword = "%" . $_POST['keyword'] . "%";
-    $params[] = $keyword;
-    $params[] = $keyword;
-    $params[] = $keyword;
-    $types .= "sss";
+if (!empty($inventory_Number)) {
+    $conditions[] = "inventory_number LIKE '%$inventory_Number%'";
 }
 
-// 构建查询语句
-$sql = "SELECT * FROM inventory";
+if (!empty($regi_starting_date) && !empty($regi_ending_date)) {
+    $conditions[] = "regi_date BETWEEN '$regi_starting_date' AND '$regi_ending_date'";
+}
+
+if (!empty($tran_starting_date) && !empty($tran_ending_date)) {
+    $conditions[] = "tran_date BETWEEN '$tran_starting_date' AND '$tran_ending_date'";
+}
+
+if (!empty($inventory_status)) {
+    $conditions[] = "inventory_status = '$inventory_status'";
+}
+
+if (!empty($keyword)) {
+    $conditions[] = "(description LIKE '%$keyword%' OR other_field LIKE '%$keyword%')";
+}
+
 if (count($conditions) > 0) {
-    $sql .= " WHERE " . implode(" AND ", $conditions);
+    $sql .= " AND " . implode(" AND ", $conditions);
 }
 
-$stmt = $conn->prepare($sql);
-if ($stmt) {
-    if (!empty($types)) {
-        $stmt->bind_param($types, ...$params);
+// 執行查詢
+$result = $conn->query($sql);
+
+// 存儲查詢結果
+$searchResults = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $searchResults[] = $row;
     }
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $searchResults = $result->fetch_all(MYSQLI_ASSOC);
-
-    $stmt->close();
-} else {
-    die("查詢失敗: " . $conn->error);
 }
+
+$_SESSION['searchResults'] = $searchResults;
 
 $conn->close();
 
-// 将查询结果传递给 SearchInventory.html
-session_start();
-$_SESSION['searchResults'] = $searchResults;
-header('Location: SearchInventory.html');
+// 重定向到 SearchPlan.html 顯示結果
+header("Location: SearchPlan.html");
 exit();
 ?>

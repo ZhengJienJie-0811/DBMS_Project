@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $inventory_number = generateIn();
 
 
-    $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date,title) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date);
 
