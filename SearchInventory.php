@@ -80,7 +80,7 @@ echo "<!DOCTYPE html>
             <tr><td>Ending Date of Registration</td><td>" . htmlspecialchars($regi_ending_date) . "</td></tr>
             <tr><td>Starting Date of Transfer</td><td>" . htmlspecialchars($tran_starting_date) . "</td></tr>
             <tr><td>Ending Date of Transfer</td><td>" . htmlspecialchars($tran_ending_date) . "</td></tr>
-            <tr><td>Inventory Status</td><td>" . htmlspecialchars($inventory_status) . "</td></tr>
+
             <tr><td>Keyword</td><td>" . htmlspecialchars($keyword) . "</td></tr>
         </table>
         
