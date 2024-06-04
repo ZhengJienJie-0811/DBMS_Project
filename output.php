@@ -98,7 +98,7 @@ $conn->close();
     <div class="container">
         <p>Inventory number: <?php echo htmlspecialchars($inventory_data['inventory_number']); ?></p>
         <p>Document code: <?php echo htmlspecialchars($inventory_data['document_code']); ?></p>
-        <p>Maker: <?php echo htmlspecialchars($inventory_data['account']); ?></p>
+        <p>Maker (Staff ID): <?php echo htmlspecialchars($inventory_data['account']); ?></p>
         <p>Subpoena number: null</p>
         <p>Title: <?php echo htmlspecialchars($inventory_data['title']); ?></p>
         <p>Plan name: <?php echo htmlspecialchars($inventory_data['plan_name']); ?></p>
@@ -128,7 +128,7 @@ $conn->close();
                 <?php foreach ($receipt_keeping_data as $item): ?>
                 <tr>
                     <td rowspan="2">Staff</td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['staff_ID']); ?></td>
+                    <td rowspan="2"><?php echo htmlspecialchars($item['account']); ?></td>
                     <td rowspan="2"><?php echo htmlspecialchars($item['payment_year_month']); ?></td>
                     <td rowspan="2"><?php echo htmlspecialchars($item['account']); ?></td>
                     <td><?php echo htmlspecialchars($item['unit_price']); ?></td>
