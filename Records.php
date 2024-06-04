@@ -12,6 +12,14 @@ if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
 
+if (!isset($_SESSION['inventory_number'])) {
+    echo "無法找到 inventory_number。\n";
+    exit();
+} else {
+    $inventory_number = $_SESSION['inventory_number'];
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $plan_number = $_POST['plan_number'];
     $budget_subject = $_POST['budget_subject'];
