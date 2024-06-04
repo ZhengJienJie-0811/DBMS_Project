@@ -96,3 +96,45 @@ $conn->close();
                     <td rowspan="2"><?php echo htmlspecialchars($item['payment_year_month']); ?></td>
                     <td rowspan="2"><?php echo htmlspecialchars($item['account']); ?></td>
                     <td><?php echo htmlspecialchars($item['unit_price']); ?></td>
+                    <td><?php echo htmlspecialchars($item['quantity']); ?></td>
+                    <td rowspan="2">0</td>
+                    <td rowspan="2"><?php echo htmlspecialchars($item['total_due']); ?></td>
+                    <td rowspan="2">0</td>
+                    <td rowspan="2">0</td>
+                    <td rowspan="2">0</td>
+                    <td rowspan="2">0</td>
+                    <td rowspan="2"><?php echo htmlspecialchars($item['net_amount']); ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><?php echo htmlspecialchars($item['description']); ?></td>
+                </tr>
+                <?php endforeach; ?>
+                <tr>
+                    <td colspan="4">Total: <?php echo count($receipt_keeping_data); ?> Entry</td>
+                    <td><?php echo array_sum(array_column($receipt_keeping_data, 'unit_price')); ?></td>
+                    <td>0</td>
+                    <td><?php echo array_sum(array_column($receipt_keeping_data, 'total_due')); ?></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td><?php echo array_sum(array_column($receipt_keeping_data, 'net_amount')); ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Undertaker: </p>
+        <p>Project manager: </p>
+        <p>Unit supervisor: </p>
+        <p>Accounting Office: </p>
+        <p>President: </p>
+        <button class="btn2" onclick="printPage()">print</button>
+        <form action="delete.php" method="post">
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($inventory_data['inventory_number']); ?>">
+            <button type="submit" class="btn2">Delete</button>
+        </form>
+        <form action="edit.php" method="post">
+            <button type="submit" class="btn2">Edit</button>
+        </form>
+    </div>
+</body>
+</html>
