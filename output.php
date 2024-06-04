@@ -59,9 +59,17 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Output</title>
     <style>
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
         table {
             width: 100%;
+            max-width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
+            word-wrap: break-word;
         }
         table, th, td {
             border: 1px solid black;
@@ -70,9 +78,8 @@ $conn->close();
             padding: 8px;
             text-align: left;
         }
-        .container {
-            max-width: 1200px;
-            margin: auto;
+        th {
+            background-color: #f2f2f2;
         }
         .btn2 {
             display: inline-block;
