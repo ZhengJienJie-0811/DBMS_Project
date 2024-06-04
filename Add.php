@@ -11,7 +11,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
-$add = $_SERVER['index.html'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $print_date = $_POST['print_date'];
