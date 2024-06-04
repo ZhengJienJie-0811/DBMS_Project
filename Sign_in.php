@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (password_verify($password, $row['password'])) {
                         $_SESSION['staff_ID'] = $row['staff_ID'];
                     }
-                    
+
                 //ob_clean();
                 header("Location: function.html");
                 exit();
@@ -76,4 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt->close();
     }
+    }
 }
+?>
