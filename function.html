@@ -1,69 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home Page</title>
-    </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
 <body>
     <div class="container">
-        <p>
-            Choose to 
-        </p>
+        <p>Choose to</p>
         <form method="POST" action="Add.html">
-            <button type="submit" class="btn2">Add </button>
+            <button type="submit" class="btn2">Add</button>
         </form>
         
-        <p>
-            or
-        </p>
+        <p>or</p>
         <form method="POST" action="SearchInventory.php">
-            <button type="submit" class="btn2">Search </button>
-            <p>
-                Please enter search criteria! 
-            </p>
+            <p>Please enter search criteria!</p>
             <table border="1">
-            <tr>
-                <th>Inventory number: </th>
-                <td>
-                    <input type="text" id="inventory_Number" name="inventory_Number">
-                </td>
-            </tr>
-            <tr>
-                <th>Starting and ending date of registration: </th>
-                <td>
-                    <input type="date" id="regi_starting_date" name="regi_starting_date">~
-                    <input type="date" id="regi_ending_date" name="regi_ending_date">
-                </td>
-            </tr>
-            <tr>
-                <th>Starting and ending date of transfer: </th>
-                <td>
-                    <input type="date" id="tran_starting_date" name="tran_starting_date">~
-                    <input type="date" id="tran_ending_date" name="tran_ending_date">
-                </td>
-            </tr>
-            <tr>
-                <th>Inventory Status: </th>
-                <td>
-                    <select>
-                        <option>temporary storage</option>
-                        <option>confirm</option>
-                        <option>void</option>
-                        <option>conclusion</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>Keyword search: </th>
-                <td>
-                    <input type="text" id="keyword" name="keyword">
-                </td>
-            </tr>
+                <tr>
+                    <th>Inventory number:</th>
+                    <td><input type="text" id="inventory_Number" name="inventory_Number"></td>
+                </tr>
+                <tr>
+                    <th>Starting and ending date of registration:</th>
+                    <td>
+                        <input type="date" id="regi_starting_date" name="regi_starting_date">~
+                        <input type="date" id="regi_ending_date" name="regi_ending_date">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Starting and ending date of transfer:</th>
+                    <td>
+                        <input type="date" id="tran_starting_date" name="tran_starting_date">~
+                        <input type="date" id="tran_ending_date" name="tran_ending_date">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Inventory Status:</th>
+                    <td>
+                        <select name="inventory_status">
+                            <option value="temporary storage">temporary storage</option>
+                            <option value="confirm">confirm</option>
+                            <option value="void">void</option>
+                            <option value="conclusion">conclusion</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Keyword search:</th>
+                    <td><input type="text" id="keyword" name="keyword"></td>
+                </tr>
+            </table>
+            <button type="submit" class="btn2">Search</button>
         </form>
-        
-    </table>
     </div>
 </body>
 </html>
