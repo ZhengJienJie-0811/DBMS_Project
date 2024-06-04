@@ -69,7 +69,7 @@ $_SESSION['searchResults'] = $searchResults;
 
 $conn->close();
 
-// 重定向到 SearchPlan.html 顯示結果
-header("Location: SearchPlan.html");
+
+header("Location: SearchInventory.html");
 exit();
 ?>
