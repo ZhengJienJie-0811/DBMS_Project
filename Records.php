@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost"; // MySQL 伺服器主機名稱
 $username = "root"; // MySQL 使用者名稱
 $password = ""; // MySQL 密碼
