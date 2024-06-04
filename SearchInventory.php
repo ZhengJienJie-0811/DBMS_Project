@@ -97,7 +97,7 @@ if (count($searchResults) > 0) {
     foreach ($searchResults as $row) {
         echo "<tr>
                 <td>" . htmlspecialchars($row['print_date']) . "</td>
-                <td>" . htmlspecialchars($row['inventory_number']) . "</td>
+                <td><a href='output.html'>" . htmlspecialchars($row['inventory_number']) . "</a></td>
                 <td>" . htmlspecialchars($row['title']) . "</td>
               </tr>";
     }
