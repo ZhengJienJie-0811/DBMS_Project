@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $inventory_number = generateIn();
 
        // 从会话中获取 account
-       if (isset($_SESSION['staff_ID'])) {
-        $staff_ID = $_SESSION['staff_ID'];
+       if (isset($_SESSION['account'])) {
+        $staff_ID = $_SESSION['account'];
     } else {
         echo "用戶未登錄。\n";
         exit();
