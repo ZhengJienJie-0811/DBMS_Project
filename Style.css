@@ -12,7 +12,7 @@ body {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 80%; 
+    width: 100%; 
     max-width: 800px; 
 }
 h2 {
@@ -28,7 +28,7 @@ label {
 }
 input[type="text"],
 input[type="password"] {
-    width: 180%;
+    width: 100%;
     padding: 8px;
     box-sizing: border-box;
 }
