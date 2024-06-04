@@ -32,17 +32,18 @@ if (!empty($inventory_Number)) {
 }
 
 if (!empty($regi_starting_date) && !empty($regi_ending_date)) {
-    $conditions[] = "regi_date BETWEEN '$regi_starting_date' AND '$regi_ending_date'";
+    $conditions[] = "print_date BETWEEN '$regi_starting_date' AND '$regi_ending_date'";
 }
 
 if (!empty($tran_starting_date) && !empty($tran_ending_date)) {
-    $conditions[] = "tran_date BETWEEN '$tran_starting_date' AND '$tran_ending_date'";
+    $conditions[] = "print_date BETWEEN '$tran_starting_date' AND '$tran_ending_date'";
 }
 
+/*
 if (!empty($inventory_status)) {
     $conditions[] = "inventory_status = '$inventory_status'";
 }
-
+*/
 if (!empty($keyword)) {
     $conditions[] = "(plan_name LIKE '%$keyword%' OR title LIKE '%$keyword%')";
 }
