@@ -13,6 +13,14 @@ if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
 
+// 从会话中获取 inventory_number
+if (!isset($_SESSION['inventory_number'])) {
+    echo "無法找到 inventory_number。\n";
+    exit();
+} else {
+    $inventory_number = $_SESSION['inventory_number'];
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = $_POST['date'];
     $invoice_number = $_POST['invoice_number'];
@@ -21,16 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $purpose = $_POST['purpose'];
     $note = $_POST['note'];
 
-    if (!isset($_SESSION['inventory_number'])) {
-        echo "無法找到 inventory_number。\n";
-        exit();
-    } else {
-        $inventory_number = $_SESSION['inventory_number'];
-    }
-    
     $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date, inventory_number) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssisss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date ,$inventory_Number);
+    $stmt->bind_param("sssisss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date, $inventory_number);
 
     if ($stmt->execute()) {
         echo  "<html lang='en'>

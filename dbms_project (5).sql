@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024-06-04 18:44:06
+-- 產生時間： 2024-06-04 21:26:16
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -35,8 +35,15 @@ CREATE TABLE `inventory` (
   `budget_subject` varchar(50) NOT NULL,
   `print_date` date NOT NULL,
   `title` varchar(50) NOT NULL,
-  `staff_ID` varchar(50) NOT NULL
+  `account` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `inventory`
+--
+
+INSERT INTO `inventory` (`plan_name`, `document_code`, `inventory_number`, `plan_number`, `budget_subject`, `print_date`, `title`, `account`) VALUES
+('該合作還是與之為敵？資源短缺下臺灣軟體科技新創加速成長中的資源重配置與競合決策流程探討', 'dd4174d8-c33b-46ab-9406-3b0bee9784ff', '4b365b70b5', '111B111037', '住宿費', '2024-06-05', '國立政治', '111306086');
 
 -- --------------------------------------------------------
 
@@ -90,6 +97,13 @@ CREATE TABLE `receipt_keeping_list` (
   `inventory_number` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 傾印資料表的資料 `receipt_keeping_list`
+--
+
+INSERT INTO `receipt_keeping_list` (`total_amount`, `plan_number`, `budget_subject`, `document_amount`, `inventory_number`) VALUES
+(2000, '111B111037', '住宿費', 2000, '4b365b70b5');
+
 -- --------------------------------------------------------
 
 --
@@ -108,7 +122,6 @@ CREATE TABLE `status` (
 --
 
 CREATE TABLE `user` (
-  `staff_ID` varchar(50) NOT NULL,
   `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(50) NOT NULL,
   `account` varchar(50) NOT NULL
@@ -118,9 +131,11 @@ CREATE TABLE `user` (
 -- 傾印資料表的資料 `user`
 --
 
-INSERT INTO `user` (`staff_ID`, `password`, `name`, `account`) VALUES
-('111', '111', '', ''),
-('1234', '1234', '', '');
+INSERT INTO `user` (`password`, `name`, `account`) VALUES
+('111', '', ''),
+('0811', 'ZJJ', '086'),
+('1234', '', ''),
+('0811', '鄭建捷', '111306086');
 
 --
 -- 已傾印資料表的索引
@@ -143,12 +158,6 @@ ALTER TABLE `plan`
 --
 ALTER TABLE `status`
   ADD PRIMARY KEY (`inventory_number`);
-
---
--- 資料表索引 `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`staff_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
