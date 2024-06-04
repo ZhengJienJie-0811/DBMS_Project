@@ -39,7 +39,7 @@ if (!empty($tran_starting_date) && !empty($tran_ending_date)) {
 }
 
 if (!empty($keyword)) {
-    $conditions[] = "(plan_name LIKE '%$keyword%' OR title LIKE '%$keyword% OR document_code LIKE '%$keyword% OR inventory_number LIKE '%$keyword% OR budget_subject LIKE '%$keyword% ')";
+    $conditions[] = "plan_name LIKE '%$keyword%' OR title LIKE '%$keyword% OR document_code LIKE '%$keyword% OR inventory_number LIKE '%$keyword% OR budget_subject LIKE '%$keyword%'";
 }
 
 if (count($conditions) > 0) {
