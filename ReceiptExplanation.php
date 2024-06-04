@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $inventory_number = $_SESSION['inventory_number'];
     }
     
-    $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date, inventory_number) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date, inventory_number) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssisss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date ,$inventory_Number);
 
