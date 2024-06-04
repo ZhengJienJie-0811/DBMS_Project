@@ -11,13 +11,14 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
+$add = $_SERVER['index.html'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $print_date = $_POST['print_date'];
     $title = $_POST['title'];
     $reason = $_POST['reason'];
     $plan_name = $_POST['plan_name'];
-
+    $staff_ID = '';
     $budget_subjet = '';
     $plan_number = ''; 
     $document_code = '';
@@ -48,10 +49,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $document_code = generateDc();
     $inventory_number = generateIn();
 
+       // 从会话中获取 account
+       if (isset($_SESSION['user'])) {
+        $staff_ID = $_SESSION['staff_ID'];
+    } else {
+        echo "用户未登录。\n";
+        exit();
+    }
 
-    $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date,title) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date,title, staff_ID) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title);
+    $stmt->bind_param("ssssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $staff_ID);
 
     if ($stmt->execute()) {
         header('Location:Records.html');

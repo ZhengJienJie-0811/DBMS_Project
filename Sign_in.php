@@ -48,6 +48,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user'] = $account;
                 echo "Password verification successful.<br>";
                 // 确保没有输出在 header 前
+                session_start();
+                $_SESSION['staff_ID'] = $user['staff_ID'];
+                $_SESSION['name'] = $user['name'];
+                $_SESSION['password'] = $user['password'];
+                $_SESSION['account'] = $user['account'];
                 ob_clean();
                 header("Location: function.html");
                 exit();
