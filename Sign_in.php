@@ -49,10 +49,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Password verification successful.<br>";
                 // 确保没有输出在 header 前
                 session_start();
-                $_SESSION['staff_ID'] = $user['staff_ID'];
-                $_SESSION['name'] = $user['name'];
-                $_SESSION['password'] = $user['password'];
-                $_SESSION['account'] = $user['account'];
+                $query = "SELECT staff_ID FROM user WHERE account = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('s', $account);
+                $stmt->execute();
+                $result = $stmt->get_result();
+            
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    // 檢查密碼
+                    if (password_verify($password, $row['password'])) {
+                        $_SESSION['staff_ID'] = $row['staff_ID'];
+                    }
+                    
                 //ob_clean();
                 header("Location: function.html");
                 exit();

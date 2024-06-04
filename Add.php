@@ -50,12 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $inventory_number = generateIn();
 
        // 从会话中获取 account
-       if (isset($_SESSION['account'])) {
-        $staff_ID = $_SESSION['account'];
-    } else {
-        echo "用戶未登錄。\n";
-        exit();
-    }
+       if (!isset($_SESSION['staff_ID'])) {
+           echo "用戶未登錄。\n";
+           exit();
+        } else {
+        $staff_ID = $_SESSION['staff_ID'];
+        }
 
 
     $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date,title, staff_ID) VALUES (?, ?, ?, ?, ?, ?, ?)";
