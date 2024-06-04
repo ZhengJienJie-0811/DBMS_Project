@@ -58,6 +58,36 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Output</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        .btn2 {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn2:hover {
+            background-color: #45a049;
+        }
+    </style>
     <script>
         function printPage() {
             window.print();
@@ -72,7 +102,7 @@ $conn->close();
         <p>Subpoena number: null</p>
         <p>Title: <?php echo htmlspecialchars($inventory_data['title']); ?></p>
         <p>Plan name: <?php echo htmlspecialchars($inventory_data['plan_name']); ?></p>
-        <table border="1">
+        <table>
             <thead>
                 <tr>
                     <th rowspan="2">Personnel</th>
