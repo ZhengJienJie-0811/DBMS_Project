@@ -91,6 +91,7 @@ echo "<!DOCTYPE html>
                 <th>Inventory number</th>
                 <th>Title</th>
             </tr>";
+            
 
 if (count($searchResults) > 0) {
     foreach ($searchResults as $row) {
