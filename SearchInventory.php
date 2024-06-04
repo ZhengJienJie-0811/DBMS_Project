@@ -46,7 +46,7 @@ if (!empty($inventory_status)) {
 */
 
 if (!empty($keyword)) {
-    $conditions[] = "(description LIKE '%$keyword%' OR other_field LIKE '%$keyword%')";
+    $conditions[] = "(plan_name LIKE '%$keyword%' OR title LIKE '%$keyword%')";
 }
 
 if (count($conditions) > 0) {
