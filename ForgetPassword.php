@@ -12,33 +12,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$account= isset($_GET['account']) ? $_GET['account'] : '';
+$account = isset($_GET['account']) ? $_GET['account'] : '';
 
-$sql = "SELECT password FROM user WHERE 1=1";  // 使用 1=1 來簡化條件附加
-$params = [];
-$types = '';
-
-if (!empty($account)) {
-    $sql .= " AND account == ?";
-    $params[] = "%".$account."%";
-    $types .= 's';
-}
-else{
+if (empty($account)) {
     echo "請輸入E-mail";
     exit();
 }
 
+$sql = "SELECT password FROM user WHERE account LIKE ?";
 $stmt = $conn->prepare($sql);
-
-if ($types && $params) {
-    $stmt->bind_param($types, ...$params);
-}
+$searchAccount = "%" . $account . "%";
+$stmt->bind_param('s', $searchAccount);
 
 $stmt->execute();
 $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
-    echo "<p>Password: " . htmlspecialchars($row['account']) . "</p>";
+    echo "<p>Password: " . htmlspecialchars($row['password']) . "</p>";
 }
 
 $stmt->close();
