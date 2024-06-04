@@ -67,7 +67,7 @@ $conn->close();
 <body>
     <div class="container">
         <p>Inventory number: <?php echo htmlspecialchars($inventory_data['inventory_number']); ?></p>
-        <p>Circulation number: <?php echo htmlspecialchars($inventory_data['document_code']); ?></p>
+        <p>Document code: <?php echo htmlspecialchars($inventory_data['document_code']); ?></p>
         <p>Maker: <?php echo htmlspecialchars($inventory_data['account']); ?></p>
         <p>Subpoena number: null</p>
         <p>Title: <?php echo htmlspecialchars($inventory_data['title']); ?></p>
