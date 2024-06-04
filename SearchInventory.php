@@ -23,7 +23,7 @@ if ($conn->connect_error) {
 }
 
 // 構建查詢語句
-$sql = "SELECT print_date, inventory_number, title FROM Inventory WHERE 1=1";
+$sql = "SELECT print_date, inventory_number, title FROM inventory WHERE 1=1";
 
 $conditions = [];
 
@@ -39,9 +39,11 @@ if (!empty($tran_starting_date) && !empty($tran_ending_date)) {
     $conditions[] = "tran_date BETWEEN '$tran_starting_date' AND '$tran_ending_date'";
 }
 
+/*
 if (!empty($inventory_status)) {
     $conditions[] = "inventory_status = '$inventory_status'";
 }
+*/
 
 if (!empty($keyword)) {
     $conditions[] = "(description LIKE '%$keyword%' OR other_field LIKE '%$keyword%')";
