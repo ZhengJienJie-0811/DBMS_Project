@@ -40,7 +40,7 @@ $stmt_receipt_explanation = $conn->prepare($sql_receipt_explanation);
 $stmt_receipt_explanation->bind_param("s", $inventory_number);
 $stmt_receipt_explanation->execute();
 $result_receipt_explanation = $stmt_receipt_explanation->get_result();
-$receipt_explanation_data = $result_receipt_explanation->fetch_all(MYSQLI_ASSOC);
+$receipt_explanation_data = $stmt_receipt_explanation->fetch_all(MYSQLI_ASSOC);
 
 $conn->close();
 ?>
