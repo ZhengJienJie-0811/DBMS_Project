@@ -33,14 +33,20 @@ $stmt_receipt_keeping = $conn->prepare($sql_receipt_keeping);
 $stmt_receipt_keeping->bind_param("s", $inventory_number);
 $stmt_receipt_keeping->execute();
 $result_receipt_keeping = $stmt_receipt_keeping->get_result();
-$receipt_keeping_data = $result_receipt_keeping->fetch_all(MYSQLI_ASSOC);
+$receipt_keeping_data = [];
+while ($row = $result_receipt_keeping->fetch_assoc()) {
+    $receipt_keeping_data[] = $row;
+}
 
 $sql_receipt_explanation = "SELECT * FROM receipt_explanation WHERE inventory_number = ?";
 $stmt_receipt_explanation = $conn->prepare($sql_receipt_explanation);
 $stmt_receipt_explanation->bind_param("s", $inventory_number);
 $stmt_receipt_explanation->execute();
 $result_receipt_explanation = $stmt_receipt_explanation->get_result();
-$receipt_explanation_data = $stmt_receipt_explanation->fetch_all(MYSQLI_ASSOC);
+$receipt_explanation_data = [];
+while ($row = $result_receipt_explanation->fetch_assoc()) {
+    $receipt_explanation_data[] = $row;
+}
 
 $conn->close();
 ?>
