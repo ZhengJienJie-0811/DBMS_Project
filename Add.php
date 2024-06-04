@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reason = $_POST['reason'];
     $plan_name = $_POST['plan_name'];
     $staff_ID = '';
-    $budget_subjet = '';
+    $budget_subject = '';
     $plan_number = ''; 
     $document_code = '';
     $inventory_number = '';
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (count($array) == 2) {
         $plan_number = $array[0];
         $budget_subject = $array[1];
-    }else{
+    } else {
         echo "The string does not contain the expected format.\n";
     }
 
@@ -49,21 +49,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $document_code = generateDc();
     $inventory_number = generateIn();
 
-       // 从会话中获取 account
-       if (!isset($_SESSION['staff_ID'])) {
-           echo "用戶未登錄。\n";
-           exit();
-        } else {
+    // 从会话中获取 staff_ID
+    if (!isset($_SESSION['staff_ID'])) {
+        echo "用戶未登錄。\n";
+        exit();
+    } else {
         $staff_ID = $_SESSION['staff_ID'];
-        }
+    }
 
-
-    $sql = "INSERT INTO inventory (plan_name,document_code,inventory_number,plan_number,budget_subject,print_date,title, staff_ID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO inventory (plan_name, document_code, inventory_number, plan_number, budget_subject, print_date, title, staff_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $staff_ID);
 
     if ($stmt->execute()) {
-        header('Location:Records.html');
+        header('Location: Records.html');
     } else {
         echo "錯誤: " . $sql . "<br>" . $conn->error;
     }
