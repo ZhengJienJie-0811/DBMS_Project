@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
     // 驗證帳號和密碼
-    $sql = "SELECT staff_ID FROM user WHERE account = ? AND password = ?";
+    $sql = "SELECT staff_id FROM users WHERE account = ? AND password = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $account, $password);
     $stmt->execute();
