@@ -10,7 +10,7 @@ $tran_ending_date = isset($_POST['tran_ending_date']) ? $_POST['tran_ending_date
 $inventory_status = isset($_POST['inventory_status']) ? $_POST['inventory_status'] : '';
 $keyword = isset($_POST['keyword']) ? $_POST['keyword'] : '';
 
-// 連接數據庫
+// 連接資料庫
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -68,7 +68,6 @@ if ($result->num_rows > 0) {
 $_SESSION['searchResults'] = $searchResults;
 
 $conn->close();
-
 
 header("Location: SearchInventory.html");
 exit();
