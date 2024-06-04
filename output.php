@@ -60,7 +60,7 @@ $conn->close();
     <title>Output</title>
     <style>
         .container {
-            max-width: 1200px;
+            max-width: 80%;
             margin: auto;
             padding: 20px;
         }
@@ -135,21 +135,21 @@ $conn->close();
                 <?php foreach ($receipt_keeping_data as $item): ?>
                 <tr>
                     <td rowspan="2">Staff</td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['account']); ?></td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['payment_year_month']); ?></td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['account']); ?></td>
-                    <td><?php echo htmlspecialchars($item['unit_price']); ?></td>
-                    <td><?php echo htmlspecialchars($item['quantity']); ?></td>
+                    <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
+                    <td rowspan="2"><?php echo htmlspecialchars($item['payment_year_month'] ?? 'N/A'); ?></td>
+                    <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
+                    <td><?php echo htmlspecialchars($item['unit_price'] ?? 'N/A'); ?></td>
+                    <td><?php echo htmlspecialchars($item['quantity'] ?? 'N/A'); ?></td>
                     <td rowspan="2">0</td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['total_due']); ?></td>
-                    <td rowspan="2">0</td>
-                    <td rowspan="2">0</td>
+                    <td rowspan="2"><?php echo htmlspecialchars($item['total_due'] ?? 'N/A'); ?></td>
                     <td rowspan="2">0</td>
                     <td rowspan="2">0</td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['net_amount']); ?></td>
+                    <td rowspan="2">0</td>
+                    <td rowspan="2">0</td>
+                    <td rowspan="2"><?php echo htmlspecialchars($item['net_amount'] ?? 'N/A'); ?></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><?php echo htmlspecialchars($item['description']); ?></td>
+                    <td colspan="2"><?php echo htmlspecialchars($item['description'] ?? 'N/A'); ?></td>
                 </tr>
                 <?php endforeach; ?>
                 <tr>
