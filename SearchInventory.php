@@ -32,18 +32,16 @@ if (!empty($inventory_Number)) {
 }
 
 if (!empty($regi_starting_date) && !empty($regi_ending_date)) {
-    $conditions[] = "print_date BETWEEN '$regi_starting_date' AND '$regi_ending_date'";
+    $conditions[] = "regi_date BETWEEN '$regi_starting_date' AND '$regi_ending_date'";
 }
 
 if (!empty($tran_starting_date) && !empty($tran_ending_date)) {
-    $conditions[] = "print_date BETWEEN '$tran_starting_date' AND '$tran_ending_date'";
+    $conditions[] = "tran_date BETWEEN '$tran_starting_date' AND '$tran_ending_date'";
 }
 
-/*
 if (!empty($inventory_status)) {
     $conditions[] = "inventory_status = '$inventory_status'";
 }
-*/
 
 if (!empty($keyword)) {
     $conditions[] = "(plan_name LIKE '%$keyword%' OR title LIKE '%$keyword%')";
@@ -65,10 +63,39 @@ if ($result->num_rows > 0) {
     }
 }
 
-$_SESSION['searchResults'] = $searchResults;
-
 $conn->close();
 
-header("Location: SearchInventory.html");
-exit();
+// 顯示搜尋結果
+echo "<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='style.css'>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Search Results</title>
+</head>
+<body>
+    <div class='container'>
+        <table border='1'>
+            <tr>
+                <th>Date</th>
+                <th>Inventory number</th>
+                <th>Title</th>
+            </tr>";
+
+if (count($searchResults) > 0) {
+    foreach ($searchResults as $row) {
+        echo "<tr>
+                <td>" . htmlspecialchars($row['print_date']) . "</td>
+                <td>" . htmlspecialchars($row['inventory_number']) . "</td>
+                <td>" . htmlspecialchars($row['title']) . "</td>
+              </tr>";
+    }
+}
+
+echo "        </table>
+        <p><a href='function.html'>Back to Search</a></p>
+    </div>
+</body>
+</html>";
 ?>
