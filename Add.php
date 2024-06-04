@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
        // 从会话中获取 account
        if (isset($_SESSION['user'])) {
-        $staff_ID = $_SESSION['user'];
+        $staff_ID = $_SESSION['staff_ID'];
     } else {
         echo "用户未登录。\n";
         exit();
