@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['password'] = $user['password'];
                 $_SESSION['account'] = $user['account'];
-                ob_clean();
+                //ob_clean();
                 header("Location: function.html");
                 exit();
             } else {
