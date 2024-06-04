@@ -19,7 +19,7 @@ $searchResults = isset($_SESSION['searchResults']) ? $_SESSION['searchResults'] 
                 <th>Inventory number</th>
                 <th>Title</th>
             </tr>
-            <?php if (count($searchResults) >
+            <?php if (count($searchResults) > 
                 <?php foreach ($searchResults as $row): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($row['print_date']); ?></td>
@@ -27,10 +27,6 @@ $searchResults = isset($_SESSION['searchResults']) ? $_SESSION['searchResults'] 
                         <td><?php echo htmlspecialchars($row['title']); ?></td>
                     </tr>
                 <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="3">No results found.</td>
-                </tr>
             <?php endif; ?>
         </table>
         <p><a href="function.html">Back to Search</a></p>
