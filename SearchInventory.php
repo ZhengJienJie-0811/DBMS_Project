@@ -58,10 +58,52 @@ if ($result->num_rows > 0) {
     }
 }
 
-$_SESSION['searchResults'] = $searchResults;
-
 $conn->close();
 
-header("Location: SearchInventory.html");
-exit();
+// 顯示接收到的表單數據和搜尋結果
+echo "<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='style.css'>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Form Inputs and Search Results</title>
+</head>
+<body>
+    <div class='container'>
+        <h2>Received Form Inputs</h2>
+        <table border='1'>
+            <tr><th>Field</th><th>Value</th></tr>
+            <tr><td>Inventory Number</td><td>" . htmlspecialchars($inventory_Number) . "</td></tr>
+            <tr><td>Starting Date of Registration</td><td>" . htmlspecialchars($regi_starting_date) . "</td></tr>
+            <tr><td>Ending Date of Registration</td><td>" . htmlspecialchars($regi_ending_date) . "</td></tr>
+            <tr><td>Starting Date of Transfer</td><td>" . htmlspecialchars($tran_starting_date) . "</td></tr>
+            <tr><td>Ending Date of Transfer</td><td>" . htmlspecialchars($tran_ending_date) . "</td></tr>
+            <tr><td>Inventory Status</td><td>" . htmlspecialchars($inventory_status) . "</td></tr>
+            <tr><td>Keyword</td><td>" . htmlspecialchars($keyword) . "</td></tr>
+        </table>
+        
+        <h2>Search Results</h2>
+        <table border='1'>
+            <tr>
+                <th>Date</th>
+                <th>Inventory number</th>
+                <th>Title</th>
+            </tr>";
+
+if (count($searchResults) > 0) {
+    foreach ($searchResults as $row) {
+        echo "<tr>
+                <td>" . htmlspecialchars($row['print_date']) . "</td>
+                <td>" . htmlspecialchars($row['inventory_number']) . "</td>
+                <td>" . htmlspecialchars($row['title']) . "</td>
+              </tr>";
+    }
+}
+
+echo "        </table>
+        <p><a href='function.html'>Back to Search</a></p>
+    </div>
+</body>
+</html>";
 ?>
