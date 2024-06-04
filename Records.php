@@ -27,9 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $document_amount = $_POST['document_amount'];
     $total_amount = $_POST['total_amount'];
 
-    $sql = "INSERT INTO receipt_keeping_list (total_amount, plan_number, budget_subject, document_amount) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO receipt_keeping_list (total_amount, plan_number, budget_subject, document_amount, inventory_number) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("issi", $total_amount, $plan_number, $budget_subject, $document_amount);
+    $stmt->bind_param("issis", $total_amount, $plan_number, $budget_subject, $document_amount, $inventory_number);
 
     if ($stmt->execute()) {
         echo  "<html lang='en'>
