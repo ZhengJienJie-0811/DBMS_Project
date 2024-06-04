@@ -18,17 +18,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
     // 驗證帳號和密碼
-    $sql = "SELECT staff_ID FROM user WHERE account = ? AND password = ?";
+    $sql = "SELECT account FROM user WHERE account = ? AND password = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $account, $password);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($staff_id);
-        $stmt->fetch();
-        // 設置 session 變量
-        $_SESSION['staff_ID'] = $staff_id;
+        // 驗證成功，將帳號存入會話
+        $_SESSION['account'] = $account;
         // 跳轉到主頁或其他頁面
         header("Location: function.html");
         exit();

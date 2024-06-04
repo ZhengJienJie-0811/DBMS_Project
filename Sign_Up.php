@@ -14,15 +14,14 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $staff_id = $_POST['staff_id'];
     $password = $_POST['password'];
     $account  = $_POST['account'];
     $name     = $_POST['name'];
 
     // 檢查帳號是否已存在
-    $check_sql = "SELECT * FROM user WHERE staff_id = ? or account = ?";
+    $check_sql = "SELECT * FROM user WHERE  account = ?";
     $check_stmt = $conn->prepare($check_sql);
-    $check_stmt->bind_param("ss", $staff_id, $account);
+    $check_stmt->bind_param("s", $account);
     $check_stmt->execute();
     $check_result = $check_stmt->get_result();
 
@@ -32,9 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         
 
-        $sql = "INSERT INTO user (staff_id, password, name, account) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO user (password, name, account) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $staff_id, $password, $name, $account);
+        $stmt->bind_param("sss", $password, $name, $account);
 
         if ($stmt->execute()) {
             echo  "<html lang='en'>

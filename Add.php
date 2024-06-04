@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $reason = $_POST['reason'];
     $plan_name = $_POST['plan_name'];
-    $staff_ID = '';
     $budget_subject = '';
     $plan_number = ''; 
     $document_code = '';
@@ -49,17 +48,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $document_code = generateDc();
     $inventory_number = generateIn();
 
-    // 从会话中获取 staff_ID
-    if (!isset($_SESSION['staff_ID'])) {
+    // 从会话中获取 account
+    if (!isset($_SESSION['account'])) {
         echo "用戶未登錄。\n";
         exit();
     } else {
-        $staff_ID = $_SESSION['staff_ID'];
+        $account = $_SESSION['account'];
     }
 
-    $sql = "INSERT INTO inventory (plan_name, document_code, inventory_number, plan_number, budget_subject, print_date, title, staff_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO inventory (plan_name, document_code, inventory_number, plan_number, budget_subject, print_date, title, account) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $staff_ID);
+    $stmt->bind_param("ssssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $account);
 
     if ($stmt->execute()) {
         header('Location: Records.html');
