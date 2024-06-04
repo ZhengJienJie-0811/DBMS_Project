@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost"; // MySQL 伺服器主機名稱
 $username = "root"; // MySQL 使用者名稱
 $password = ""; // MySQL 密碼
@@ -20,9 +21,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $purpose = $_POST['purpose'];
     $note = $_POST['note'];
 
-    $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date) VALUES (?, ?, ?, ?, ?, ?)";
+    if (!isset($_SESSION['inventory_number'])) {
+        echo "無法找到 inventory_number。\n";
+        exit();
+    } else {
+        $inventory_number = $_SESSION['inventory_number'];
+    }
+    
+    $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date, inventory_number) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssiss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date);
+    $stmt->bind_param("sssisss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date ,$inventory_Number);
 
     if ($stmt->execute()) {
         echo  "<html lang='en'>
