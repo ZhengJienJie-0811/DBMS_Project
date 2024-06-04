@@ -21,19 +21,19 @@ if ($conn->connect_error) {
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $staff_id = $_POST['staff_id'];
+    $account = $_POST['account'];
     $password = $_POST['password'];
 
     // 验证输入
-    if (empty($staff_id) || empty($password)) {
+    if (empty($account) || empty($password)) {
         $message = "帳號與密碼都是必填的。";
     } else {
         // 预备查询
-        $stmt = $conn->prepare("SELECT password FROM user WHERE staff_id = ?");
+        $stmt = $conn->prepare("SELECT password FROM user WHERE account = ?");
         if ($stmt === false) {
             die("預備查詢失敗: " . $conn->error);
         }
-        $stmt->bind_param("s", $staff_id);
+        $stmt->bind_param("s", $account);
         $stmt->execute();
         $stmt->store_result();
 
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // 验证密码
             if ($password == $stored_password) { // 直接比较密码
-                $_SESSION['user'] = $staff_id;
+                $_SESSION['user'] = $account;
                 echo "Password verification successful.<br>";
                 // 确保没有输出在 header 前
                 ob_clean();
