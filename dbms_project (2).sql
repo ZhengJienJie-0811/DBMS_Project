@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024-06-01 16:49:08
+-- 產生時間： 2024-06-04 14:08:13
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -33,8 +33,38 @@ CREATE TABLE `inventory` (
   `inventory_number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `plan_number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `budget_subject` varchar(50) NOT NULL,
-  `print_date` date NOT NULL
+  `print_date` date NOT NULL,
+  `title` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `inventory`
+--
+
+INSERT INTO `inventory` (`plan_name`, `document_code`, `inventory_number`, `plan_number`, `budget_subject`, `print_date`, `title`) VALUES
+('破解TikTok直播商務成功的密碼：一種多模態特徵粹取方法', 'ed154f6e-429d-46fe-969a-9984c8c1c62f', 'cf572e40dd', '112B112243', '講師', '2024-06-04', '64');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `plan`
+--
+
+CREATE TABLE `plan` (
+  `plan_name` varchar(50) NOT NULL,
+  `plan_number` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `plan`
+--
+
+INSERT INTO `plan` (`plan_name`, `plan_number`) VALUES
+('該合作還是與之為敵？資源短缺下臺灣軟體科技新創加速成長中的資源重配置與競合決策流程探討', '111B111037'),
+('社交人形機器人於輕度認知障礙之高齡照護探討：結合可用性評估和機器學習於輔助科技之應用(1/3)', '111B111057'),
+('人工智慧模型的軟體驗證與資訊安全', '112B112113'),
+('數據轉換系統的正確性與可解釋性的自動推論(1/3)', '112B112151'),
+('破解TikTok直播商務成功的密碼：一種多模態特徵粹取方法', '112B112243');
 
 -- --------------------------------------------------------
 
@@ -51,6 +81,13 @@ CREATE TABLE `receipt_explanation` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 傾印資料表的資料 `receipt_explanation`
+--
+
+INSERT INTO `receipt_explanation` (`cost_category`, `note`, `invoice_number`, `total_amount_of_receipt`, `purpose`, `date`) VALUES
+('差旅費', '', '12345', 1000, '', '2024-06-04');
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +100,13 @@ CREATE TABLE `receipt_keeping_list` (
   `budget_subject` varchar(50) NOT NULL,
   `document_amount` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `receipt_keeping_list`
+--
+
+INSERT INTO `receipt_keeping_list` (`total_amount`, `plan_number`, `budget_subject`, `document_amount`) VALUES
+(1333, '111B111037', '講師費', 1333);
 
 -- --------------------------------------------------------
 
@@ -90,8 +134,18 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`staff_ID`, `password`) VALUES
-('111306086', '$2y$10$28nlV.e0/XLbYXTQCX53j./2yBer8Gwe6nMPCV.e/lh'),
-('test', '$2y$10$xH58zcd57wDrMjZbz5FtPuxPgNlIPRXJ06M/TvQN8mB');
+('1234', '1234'),
+('111', '111');
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `plan`
+--
+ALTER TABLE `plan`
+  ADD PRIMARY KEY (`plan_number`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
