@@ -42,7 +42,6 @@ if (!empty($keyword)) {
     $conditions[] = "(plan_name LIKE '%$keyword%' OR title LIKE '%$keyword%' OR document_code LIKE '%$keyword%' OR inventory_number LIKE '%$keyword%' OR budget_subject LIKE '%$keyword%')";
 }
 
-
 if (count($conditions) > 0) {
     $sql .= " AND " . implode(" AND ", $conditions);
 }
@@ -80,7 +79,6 @@ echo "<!DOCTYPE html>
             <tr><td>Ending Date of Registration</td><td>" . htmlspecialchars($regi_ending_date) . "</td></tr>
             <tr><td>Starting Date of Transfer</td><td>" . htmlspecialchars($tran_starting_date) . "</td></tr>
             <tr><td>Ending Date of Transfer</td><td>" . htmlspecialchars($tran_ending_date) . "</td></tr>
-
             <tr><td>Keyword</td><td>" . htmlspecialchars($keyword) . "</td></tr>
         </table>
         
@@ -91,13 +89,12 @@ echo "<!DOCTYPE html>
                 <th>Inventory number</th>
                 <th>Title</th>
             </tr>";
-            
 
 if (count($searchResults) > 0) {
     foreach ($searchResults as $row) {
         echo "<tr>
                 <td>" . htmlspecialchars($row['print_date']) . "</td>
-                <td><a href='output.html'>" . htmlspecialchars($row['inventory_number']) . "</a></td>
+                <td><a href='output.php?inventory_number=" . htmlspecialchars($row['inventory_number']) . "'>" . htmlspecialchars($row['inventory_number']) . "</a></td>
                 <td>" . htmlspecialchars($row['title']) . "</td>
               </tr>";
     }
