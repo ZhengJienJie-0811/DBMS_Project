@@ -100,10 +100,11 @@
             </p>
             <button type="submit" class="btn2">Edit</button>
         </form>
-        <form action="delete.php" method="post">
-            <input type="hidden" name="id" value="<?php >">
-            <button type="submit" class="btn2">Delete</button>
-        </form>
+      <form action="delete.php" method="post" onsubmit="return confirm('Are you sure you want to delete this record?');">
+    <input type="hidden" name="id" value="<?php echo htmlspecialchars($inventory_data['inventory_number']); ?>">
+    <button type="submit" class="btn2">Delete</button>
+</form>
+
     </div>
 </body>
 </html>
