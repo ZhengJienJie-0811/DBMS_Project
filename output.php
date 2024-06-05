@@ -117,7 +117,6 @@ $conn->close();
                     <th rowspan="2">Personnel</th>
                     <th rowspan="2">Staff_ID</th>
                     <th rowspan="2">Payment<br>Year/Month</th>
-                    <th rowspan="2">Account</th>
                     <th colspan="2">Items</th>
                     <th rowspan="2">Health<br>Insurance (Employer)</th>
                     <th rowspan="2">Total<br>Due</th>
@@ -138,9 +137,8 @@ $conn->close();
                     <?php foreach ($receipt_keeping_data as $item): ?>
                     <tr>
                         <td rowspan="2">Staff</td>
-                        <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
+                        <td rowspan="2"><?php echo htmlspecialchars($inventory_data['account']); ?></p>
                         <td rowspan="2"><?php echo htmlspecialchars($item['payment_year_month'] ?? 'N/A'); ?></td>
-                        <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
                         <td><?php echo htmlspecialchars($item['unit_price'] ?? 'N/A'); ?></td>
                         <td><?php echo htmlspecialchars($item['quantity'] ?? 'N/A'); ?></td>
                         <td rowspan="2">0</td>
