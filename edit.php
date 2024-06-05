@@ -1,59 +1,3 @@
-確定，我會將你的HTML部分換成PHP的形式，保留所有的值。以下是更新後的PHP檔案：
-
-```php
-<?php
-session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "DBMS_Project";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("連線失敗: " . $conn->connect_error);
-}
-
-$inventory_number = isset($_GET['inventory_number']) ? $_GET['inventory_number'] : '';
-
-if (empty($inventory_number)) {
-    die("未提供 inventory_number。");
-}
-
-// 查询与 inventory_number 相关的数据
-$sql_inventory = "SELECT * FROM inventory WHERE inventory_number = ?";
-$stmt_inventory = $conn->prepare($sql_inventory);
-$stmt_inventory->bind_param("s", $inventory_number);
-$stmt_inventory->execute();
-$result_inventory = $stmt_inventory->get_result();
-$inventory_data = $result_inventory->fetch_assoc();
-
-$print_date = $inventory_data['print_date'];
-$payment_year_month = date("Y-m", strtotime($print_date));
-
-// 查询 receipt_explanation 表中与 inventory_number 相关的 invoice_number
-$sql_invoice = "SELECT invoice_number FROM receipt_explanation WHERE inventory_number = ?";
-$stmt_invoice = $conn->prepare($sql_invoice);
-$stmt_invoice->bind_param("s", $inventory_number);
-$stmt_invoice->execute();
-$result_invoice = $stmt_invoice->get_result();
-$invoice_data = $result_invoice->fetch_assoc();
-
-// 查询 receipt_keeping_list 表中与 inventory_number 相关的数据
-$sql_receipt_keeping = "SELECT * FROM receipt_keeping_list WHERE inventory_number = ?";
-$stmt_receipt_keeping = $conn->prepare($sql_receipt_keeping);
-$stmt_receipt_keeping->bind_param("s", $inventory_number);
-$stmt_receipt_keeping->execute();
-$result_receipt_keeping = $stmt_receipt_keeping->get_result();
-$receipt_keeping_data = [];
-while ($row = $result_receipt_keeping->fetch_assoc()) {
-    $receipt_keeping_data[] = $row;
-}
-
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,12 +51,32 @@ $conn->close();
 <body>
     <div class="container">
         <?php if ($inventory_data): ?>
-            <p>Inventory number: <?php echo htmlspecialchars($inventory_data['inventory_number']); ?></p>
-            <p>Document code: <?php echo htmlspecialchars($inventory_data['document_code']); ?></p>
-            <p>Maker (Staff ID): <?php echo htmlspecialchars($inventory_data['account']); ?></p>
-            <p>Receipt number: <?php echo htmlspecialchars($invoice_data['invoice_number'] ?? 'N/A'); ?></p>
-            <p>Title: <?php echo htmlspecialchars($inventory_data['title']); ?></p>
-            <p>Plan name: <?php echo htmlspecialchars($inventory_data['plan_name']); ?></p>
+            <table>
+                <tr>
+                    <td>Inventory number:</td>
+                    <td><input type="text" name="inventory_number" value="<?php echo htmlspecialchars($inventory_data['inventory_number']); ?>"></td>
+                </tr>
+                <tr>
+                    <td>Document code:</td>
+                    <td><input type="text" name="document_code" value="<?php echo htmlspecialchars($inventory_data['document_code']); ?>"></td>
+                </tr>
+                <tr>
+                    <td>Maker (Staff ID):</td>
+                    <td><input type="text" name="account" value="<?php echo htmlspecialchars($inventory_data['account']); ?>"></td>
+                </tr>
+                <tr>
+                    <td>Receipt number:</td>
+                    <td><input type="text" name="invoice_number" value="<?php echo htmlspecialchars($invoice_data['invoice_number'] ?? 'N/A'); ?>"></td>
+                </tr>
+                <tr>
+                    <td>Title:</td>
+                    <td><input type="text" name="title" value="<?php echo htmlspecialchars($inventory_data['title']); ?>"></td>
+                </tr>
+                <tr>
+                    <td>Plan name:</td>
+                    <td><input type="text" name="plan_name" value="<?php echo htmlspecialchars($inventory_data['plan_name']); ?>"></td>
+                </tr>
+            </table>
         <?php else: ?>
             <p>No inventory data found.</p>
         <?php endif; ?>
@@ -144,21 +108,21 @@ $conn->close();
                     <?php foreach ($receipt_keeping_data as $item): ?>
                     <tr>
                         <td rowspan="2">Staff</td>
-                        <td rowspan="2"><?php echo htmlspecialchars($inventory_data['account']); ?></td>
-                        <td rowspan="2"><?php echo htmlspecialchars($payment_year_month); ?></td>
-                        <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($item['unit_price'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($item['quantity'] ?? 'N/A'); ?></td>
-                        <td rowspan="2">0</td>
-                        <td rowspan="2"><?php echo htmlspecialchars($item['total_due'] ?? 'N/A'); ?></td>
-                        <td rowspan="2">0</td>
-                        <td rowspan="2">0</td>
-                        <td rowspan="2">0</td>
-                        <td rowspan="2">0</td>
-                        <td rowspan="2"><?php echo htmlspecialchars($item['net_amount'] ?? 'N/A'); ?></td>
+                        <td rowspan="2"><input type="text" name="account" value="<?php echo htmlspecialchars($inventory_data['account']); ?>"></td>
+                        <td rowspan="2"><input type="text" name="payment_year_month" value="<?php echo htmlspecialchars($payment_year_month); ?>"></td>
+                        <td rowspan="2"><input type="text" name="account" value="<?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?>"></td>
+                        <td><input type="text" name="unit_price" value="<?php echo htmlspecialchars($item['unit_price'] ?? 'N/A'); ?>"></td>
+                        <td><input type="text" name="quantity" value="<?php echo htmlspecialchars($item['quantity'] ?? 'N/A'); ?>"></td>
+                        <td rowspan="2"><input type="text" name="health_insurance_employer" value="0"></td>
+                        <td rowspan="2"><input type="text" name="total_due" value="<?php echo htmlspecialchars($item['total_due'] ?? 'N/A'); ?>"></td>
+                        <td rowspan="2"><input type="text" name="tax" value="0"></td>
+                        <td rowspan="2"><input type="text" name="health_insurance" value="0"></td>
+                        <td rowspan="2"><input type="text" name="other_deductions" value="0"></td>
+                        <td rowspan="2"><input type="text" name="total_deductions" value="0"></td>
+                        <td rowspan="2"><input type="text" name="net_amount" value="<?php echo htmlspecialchars($item['net_amount'] ?? 'N/A'); ?>"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><?php echo htmlspecialchars($item['description'] ?? 'N/A'); ?></td>
+                        <td colspan="2"><input type="text" name="description" value="<?php echo htmlspecialchars($item['description'] ?? 'N/A'); ?>"></td>
                     </tr>
                     <?php endforeach; ?>
                     <tr>
@@ -184,7 +148,7 @@ $conn->close();
         <p>Accounting Office: </p>
         <p>President: </p>
         <button class="btn2" onclick="printPage()">print</button>
-        <form action="delete.php" method="post">
+        <form action="delete.php" method="post" onsubmit="return confirm('Are you sure you want to delete this record?');">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($inventory_data['inventory_number']); ?>">
             <button type="submit" class="btn2">Delete</button>
         </form>
@@ -194,4 +158,3 @@ $conn->close();
     </div>
 </body>
 </html>
-```
