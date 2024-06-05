@@ -1,3 +1,6 @@
+確定，我會將你的HTML部分換成PHP的形式，保留所有的值。以下是更新後的PHP檔案：
+
+```php
 <?php
 session_start();
 
@@ -191,3 +194,4 @@ $conn->close();
     </div>
 </body>
 </html>
+```
