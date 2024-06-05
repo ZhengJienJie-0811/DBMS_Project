@@ -1,15 +1,13 @@
 <?php
 session_start();
 
-$servername = "localhost"; // MySQL 伺服器主機名稱
-$username = "root"; // MySQL 使用者名稱
-$password = ""; // MySQL 密碼
-$dbname = "DBMS_Project"; // 資料庫名稱
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "DBMS_Project";
 
-// 建立連線
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// 檢查連線
 if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
@@ -20,7 +18,6 @@ if (empty($inventory_number)) {
     die("未提供 inventory_number。");
 }
 
-// 查询与 inventory_number 相关的数据
 $sql_inventory = "SELECT * FROM inventory WHERE inventory_number = ?";
 $stmt_inventory = $conn->prepare($sql_inventory);
 $stmt_inventory->bind_param("s", $inventory_number);
@@ -54,7 +51,7 @@ $conn->close();
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Output</title>
@@ -103,12 +100,17 @@ $conn->close();
 </head>
 <body>
     <div class="container">
-        <p>Inventory number: <?php echo htmlspecialchars($inventory_data['inventory_number']); ?></p>
-        <p>Document code: <?php echo htmlspecialchars($inventory_data['document_code']); ?></p>
-        <p>Maker (Staff ID): <?php echo htmlspecialchars($inventory_data['account']); ?></p>
-        <p>Subpoena number: null</p>
-        <p>Title: <?php echo htmlspecialchars($inventory_data['title']); ?></p>
-        <p>Plan name: <?php echo htmlspecialchars($inventory_data['plan_name']); ?></p>
+        <?php if ($inventory_data): ?>
+            <p>Inventory number: <?php echo htmlspecialchars($inventory_data['inventory_number']); ?></p>
+            <p>Document code: <?php echo htmlspecialchars($inventory_data['document_code']); ?></p>
+            <p>Maker (Staff ID): <?php echo htmlspecialchars($inventory_data['account']); ?></p>
+            <p>Subpoena number: null</p>
+            <p>Title: <?php echo htmlspecialchars($inventory_data['title']); ?></p>
+            <p>Plan name: <?php echo htmlspecialchars($inventory_data['plan_name']); ?></p>
+        <?php else: ?>
+            <p>No inventory data found.</p>
+        <?php endif; ?>
+
         <table>
             <thead>
                 <tr>
@@ -132,39 +134,44 @@ $conn->close();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($receipt_keeping_data as $item): ?>
-                <tr>
-                    <td rowspan="2">Staff</td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['payment_year_month'] ?? 'N/A'); ?></td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
-                    <td><?php echo htmlspecialchars($item['unit_price'] ?? 'N/A'); ?></td>
-                    <td><?php echo htmlspecialchars($item['quantity'] ?? 'N/A'); ?></td>
-                    <td rowspan="2">0</td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['total_due'] ?? 'N/A'); ?></td>
-                    <td rowspan="2">0</td>
-                    <td rowspan="2">0</td>
-                    <td rowspan="2">0</td>
-                    <td rowspan="2">0</td>
-                    <td rowspan="2"><?php echo htmlspecialchars($item['net_amount'] ?? 'N/A'); ?></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><?php echo htmlspecialchars($item['description'] ?? 'N/A'); ?></td>
-                </tr>
-                <?php endforeach; ?>
-                <tr>
-                    <td colspan="4">Total: <?php echo count($receipt_keeping_data); ?> Entry</td>
-                    <td><?php echo array_sum(array_column($receipt_keeping_data, 'unit_price')); ?></td>
-                    <td>0</td>
-                    <td><?php echo array_sum(array_column($receipt_keeping_data, 'total_due')); ?></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td><?php echo array_sum(array_column($receipt_keeping_data, 'net_amount')); ?></td>
-                </tr>
+                <?php if (count($receipt_keeping_data) > 0): ?>
+                    <?php foreach ($receipt_keeping_data as $item): ?>
+                    <tr>
+                        <td rowspan="2">Staff</td>
+                        <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
+                        <td rowspan="2"><?php echo htmlspecialchars($item['payment_year_month'] ?? 'N/A'); ?></td>
+                        <td rowspan="2"><?php echo htmlspecialchars($item['account'] ?? 'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($item['unit_price'] ?? 'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($item['quantity'] ?? 'N/A'); ?></td>
+                        <td rowspan="2">0</td>
+                        <td rowspan="2"><?php echo htmlspecialchars($item['total_due'] ?? 'N/A'); ?></td>
+                        <td rowspan="2">0</td>
+                        <td rowspan="2">0</td>
+                        <td rowspan="2">0</td>
+                        <td rowspan="2">0</td>
+                        <td rowspan="2"><?php echo htmlspecialchars($item['net_amount'] ?? 'N/A'); ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><?php echo htmlspecialchars($item['description'] ?? 'N/A'); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                    <tr>
+                        <td colspan="4">Total: <?php echo count($receipt_keeping_data); ?> Entry</td>
+                        <td><?php echo array_sum(array_column($receipt_keeping_data, 'unit_price')); ?></td>
+                        <td>0</td>
+                        <td><?php echo array_sum(array_column($receipt_keeping_data, 'total_due')); ?></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td><?php echo array_sum(array_column($receipt_keeping_data, 'net_amount')); ?></td>
+                    </tr>
+                <?php else: ?>
+                    <tr><td colspan='13'>No receipt keeping data found.</td></tr>
+                <?php endif; ?>
             </tbody>
         </table>
+        
         <p>Undertaker: </p>
         <p>Project manager: </p>
         <p>Unit supervisor: </p>
