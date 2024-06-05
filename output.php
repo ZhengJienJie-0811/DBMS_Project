@@ -104,7 +104,7 @@ $conn->close();
             <p>Inventory number: <?php echo htmlspecialchars($inventory_data['inventory_number']); ?></p>
             <p>Document code: <?php echo htmlspecialchars($inventory_data['document_code']); ?></p>
             <p>Maker (Staff ID): <?php echo htmlspecialchars($inventory_data['account']); ?></p>
-            <p>Receipt number: null</p>
+            <p>Receipt number: <?php echo htmlspecialchars($invoice_data['invoice_number'] ?? 'N/A'); ?></p>
             <p>Title: <?php echo htmlspecialchars($inventory_data['title']); ?></p>
             <p>Plan name: <?php echo htmlspecialchars($inventory_data['plan_name']); ?></p>
         <?php else: ?>
