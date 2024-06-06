@@ -1,3 +1,58 @@
+<?php
+session_start();
+$servername = "localhost"; // MySQL 伺服器主機名稱
+$username = "root"; // MySQL 使用者名稱
+$password = ""; // MySQL 密碼
+$dbname = ""; // 資料庫名稱
+
+$conn = new mysqli("localhost", "root", "","");
+
+if ($conn->connect_error) {
+    die("連線失敗: " . $conn->connect_error);
+}
+
+$inventory_number = isset($_GET['inventory_number']) ? $_GET['inventory_number'] : '';
+
+if (empty($inventory_number)) {
+    die("未提供 inventory_number。");
+}
+
+// 查询与 inventory_number 相关的数据
+$sql_inventory = "SELECT * FROM inventory WHERE inventory_number = ?";
+$stmt_inventory = $conn->prepare($sql_inventory);
+$stmt_inventory->bind_param("s", $inventory_number);
+$stmt_inventory->execute();
+$result_inventory = $stmt_inventory->get_result();
+$inventory_data = $result_inventory->fetch_assoc();
+
+
+$print_date = $inventory_data['print_date'];
+$payment_year_month = date("Y-m", strtotime($print_date));
+$Account =  $inventory_data['account'];
+$quantity = 1;
+
+// 查询 receipt_explanation 表中与 inventory_number 相关的 invoice_number
+$sql_invoice = "SELECT invoice_number FROM receipt_explanation WHERE inventory_number = ?";
+$stmt_invoice = $conn->prepare($sql_invoice);
+$stmt_invoice->bind_param("s", $inventory_number);
+$stmt_invoice->execute();
+$result_invoice = $stmt_invoice->get_result();
+$invoice_data = $result_invoice->fetch_assoc();
+
+
+// 查询 receipt_keeping_list 表中与 inventory_number 相关的数据
+$sql_receipt_keeping = "SELECT * FROM receipt_keeping_list WHERE inventory_number = ?";
+$stmt_receipt_keeping = $conn->prepare($sql_receipt_keeping);
+$stmt_receipt_keeping->bind_param("s", $inventory_number);
+$stmt_receipt_keeping->execute();
+$result_receipt_keeping = $stmt_receipt_keeping->get_result();
+$receipt_keeping_data = [];
+while ($row = $result_receipt_keeping->fetch_assoc()) {
+    $receipt_keeping_data[] = $row;
+}
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html>
 <head>
