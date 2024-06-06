@@ -1,12 +1,11 @@
 <?php
 session_start();
+$servername = "localhost"; // MySQL 伺服器主機名稱
+$username = "root"; // MySQL 使用者名稱
+$password = "5y20d"; // MySQL 密碼
+$dbname = "phpmyadmin"; // 資料庫名稱
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "DBMS_Project";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli("localhost", "root", "5y20d","phpmyadmin");
 
 if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
@@ -26,8 +25,11 @@ $stmt_inventory->execute();
 $result_inventory = $stmt_inventory->get_result();
 $inventory_data = $result_inventory->fetch_assoc();
 
+
 $print_date = $inventory_data['print_date'];
 $payment_year_month = date("Y-m", strtotime($print_date));
+$Account =  $inventory_data['account'];
+$quantity = 1;
 
 // 查询 receipt_explanation 表中与 inventory_number 相关的 invoice_number
 $sql_invoice = "SELECT invoice_number FROM receipt_explanation WHERE inventory_number = ?";
@@ -37,6 +39,7 @@ $stmt_invoice->execute();
 $result_invoice = $stmt_invoice->get_result();
 $invoice_data = $result_invoice->fetch_assoc();
 
+
 // 查询 receipt_keeping_list 表中与 inventory_number 相关的数据
 $sql_receipt_keeping = "SELECT * FROM receipt_keeping_list WHERE inventory_number = ?";
 $stmt_receipt_keeping = $conn->prepare($sql_receipt_keeping);
@@ -44,11 +47,21 @@ $stmt_receipt_keeping->bind_param("s", $inventory_number);
 $stmt_receipt_keeping->execute();
 $result_receipt_keeping = $stmt_receipt_keeping->get_result();
 $receipt_keeping_data = [];
+
+
 while ($row = $result_receipt_keeping->fetch_assoc()) {
     $receipt_keeping_data[] = $row;
 }
 
-$conn->close();
+// 初始化 total_amount 變量
+$total_amount = 0;
+
+// 遍歷 receipt_keeping_data 數組，累加 total_amount
+foreach ($receipt_keeping_data as $item) {
+    if (isset($item['total_amount'])) {
+        $total_amount += $item['total_amount'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -120,6 +133,7 @@ $conn->close();
                     <th rowspan="2">Personnel</th>
                     <th rowspan="2">Staff_ID</th>
                     <th rowspan="2">Payment<br>Year/Month</th>
+                    <th rowspan="2">Account</th>
                     <th colspan="2">Items</th>
                     <th rowspan="2">Health<br>Insurance (Employer)</th>
                     <th rowspan="2">Total<br>Due</th>
@@ -142,18 +156,19 @@ $conn->close();
                         <td rowspan="2">Staff</td>
                         <td rowspan="2"><?php echo htmlspecialchars($inventory_data['account']); ?></td>
                         <td rowspan="2"><?php echo htmlspecialchars($payment_year_month); ?></td>
-                        <td><?php echo htmlspecialchars($item['unit_price'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($item['quantity'] ?? 'N/A'); ?></td>
+                        <td rowspan="2"><?php echo htmlspecialchars($Account?? 'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($total_amount??'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($quantity?? 'N/A'); ?></td>
                         <td rowspan="2">0</td>
-                        <td rowspan="2"><?php echo htmlspecialchars($item['total_due'] ?? 'N/A'); ?></td>
+                        <td rowspan="2"><?php echo htmlspecialchars($total_amount ?? 'N/A'); ?></td>
                         <td rowspan="2">0</td>
                         <td rowspan="2">0</td>
                         <td rowspan="2">0</td>
                         <td rowspan="2">0</td>
-                        <td rowspan="2"><?php echo htmlspecialchars($item['net_amount'] ?? 'N/A'); ?></td>
+                        <td rowspan="2"><?php echo htmlspecialchars($total_amount?? 'N/A'); ?></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><?php echo htmlspecialchars($item['description'] ?? 'N/A'); ?></td>
+                        <td colspan="2"><?php echo htmlspecialchars($total_amount?? 'N/A'); ?></td>
                     </tr>
                     <?php endforeach; ?>
                     <tr>
