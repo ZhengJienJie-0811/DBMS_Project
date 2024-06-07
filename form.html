@@ -5,13 +5,24 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Form</title>
+        <script>
+            function searchPlan() {
+                var planName = document.getElementById('plan_name').value;
+                var planNumber = document.getElementById('plan_number').value;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'SearchPlan.php?plan_name=' + encodeURIComponent(planName) + '&plan_number=' + encodeURIComponent(planNumber), true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        document.getElementById('results').innerHTML = xhr.responseText;
+                    }
+                };
+                xhr.send();
+            }
+        </script>
     </head>
     <body>
         <div class="container">
-            <p>
-                Please enter the information below! 
-            </p>
-            <form method="POST" action="Add.php" >
+            <form method="POST" action="form.php" >
                 <table border="1">
                 <tr>
                     <th>Date: </th>
@@ -29,6 +40,18 @@
                     <th>Reason: </th>
                     <td>
                         Plan number: <input type="text" id="plan_number" name="plan_number">
+                        <br>
+                        Plan search: 
+                        <form onsubmit="event.preventDefault(); searchPlan();">
+                            <label for="plan_name_keyword">Keyword search:</label>
+                            <input type="text" id="plan_name_keyword" name="plan_name_keyword">
+                            <br>
+                            <label for="plan_number">Plan Number:</label>
+                            <input type="text" id="plan_number" name="plan_number">
+                            <br>
+                            <button type="submit" class="btn">Search</button>
+                        </form>
+                        <br>
                         Budge subject: 
                         <select id="budeg_subject">
                             <option value="transportation">Transportation</option>
@@ -37,18 +60,6 @@
                             <option value="lecturer's_fee">Lecturer's fee</option>
                             <option value="other">Other</option>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Quantity of receipt: </th>
-                    <td>
-                        <input type="text" id="document_amount" name="document_amount">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Total amount: </th>
-                    <td>
-                        <input type="text" id="total_amount" name="total_amount">
                     </td>
                 </tr>
                 <tr>
@@ -88,7 +99,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <th colspan="2" class="section-title">Payable amount: </th>
+                    <th><label for="payable_amount">Payable amount: </label></th>
+                    <td>
+                        <input type="text" id="payable_amount" name="payable_amount">
+                    </td>
                 </tr>
                 <tr>
                     <th><label for="unitPrice">Unit price: </label></th>
@@ -96,7 +110,13 @@
                 </tr>
                 <tr>
                     <th><label for="quantity">Quantity: </label></th>
-                    <td><input type="number" id="quantity"></td>
+                    <td><input type="number" id="quantity" name="quantity"></td>
+                </tr>
+                <tr>
+                    <th>Quantity of receipt: </th>
+                    <td>
+                        <input type="text" id="document_amount" name="document_amount">
+                    </td>
                 </tr>
                 <tr>
                     <th><label for="amount">Total amount: </label></th>
@@ -110,56 +130,10 @@
                     <th><label for="remarks">Remarks: </label></th>
                     <td><textarea id="remarks" rows="3"></textarea></td>
                 </tr>
+                
             </table>
-            </form>
-        </div>
-        <div class="container">
-            <p>
-                Please enter the information below! 
-            </p>
-            <form method="POST" action="ReceiptExplanation.php">
-            <table border="1">
-                    <tr>
-                        <th>Date: </th>
-                        <td>
-                            <input type="date" id="date" name="date">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Invoice Number</th>
-                        <td>
-                            <input type="text" id="invoice_number" name="invoice_number">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Total amount of receipt: </th>
-                        <td>
-                            <input type="text" id="total_amount_of_receipt" name="total_amount_of_receipt">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Cost category: </th>
-                        <td>
-                            <input type="text" id="cost_category" name="cost_category">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Purpose: </th>
-                        <td>
-                            <input type="text" id="purpose" name="purpose">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Note: </th>
-                        <td>
-                            <input type="text" id="note" name="note">
-                        </td>
-                    </tr>
-                </table>
-                <button type="submit" class="submitbtn">Store</button>
-            </form>
-            <form method="POST" action="output.html">
-                <button type="submit" class="submitbtn">View</button>
+            <button type="submit" value="Submit" class="submitbtn">Submit</button>
+            <button type="reset" value="Reset" class="submitbtn">Reset</button>
             </form>
         </div>
     </body>

@@ -6,13 +6,13 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #f4f4f4;
+    overflow:auto;
 }
 .container {
     background-color: white;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 100%; 
 }
 h2 {
     margin-bottom: 20px;
@@ -32,7 +32,7 @@ input[type="password"] {
     box-sizing: border-box;
 }
 .submitbtn {
-    width: 100%;
+    width: 49%;
     padding: 10px;
     background-color: #007BFF;
     color: white;
@@ -40,19 +40,7 @@ input[type="password"] {
     border-radius: 4px;
     cursor: pointer;
 }
-.btn:hover {
-    background-color: #0056b3;
-}
 .btn {
-    width: 49%;
-    padding: 10px;
-    background-color: #0044ff1e;
-    color: black;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}   
-.btn2 {
     width: 49%;
     padding: 10px;
     background-color: #0091ff83;
@@ -60,4 +48,8 @@ input[type="password"] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+form {
+    overflow-y: auto;
+    max-height: 100vh;
 }

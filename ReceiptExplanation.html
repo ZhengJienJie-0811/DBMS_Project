@@ -1,60 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Receipt explanaton</title>
-    </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Explanation</title>
+</head>
 <body>
     <div class="container">
-        <p>
-            Please enter the information below! 
-        </p>
-        <form method="POST" action="ReceiptExplanation.php">
-        <table border="1">
-                <tr>
-                    <th>Date: </th>
-                    <td>
-                        <input type="date" id="date" name="date">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Invoice Number</th>
-                    <td>
-                        <input type="text" id="invoice_number" name="invoice_number">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Total amount of receipt: </th>
-                    <td>
-                        <input type="text" id="total_amount_of_receipt" name="total_amount_of_receipt">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Cost category: </th>
-                    <td>
-                        <input type="text" id="cost_category" name="cost_category">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Purpose: </th>
-                    <td>
-                        <input type="text" id="purpose" name="purpose">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Note: </th>
-                    <td>
-                        <input type="text" id="note" name="note">
-                    </td>
-                </tr>
-            </table>
-            <button type="submit" class="submitbtn">Store</button>
-        </form>
-        <form method="POST" action="output.html">
-            <button type="submit" class="submitbtn">View</button>
-        </form>
+        <p>Generated Forms based on Quantity</p>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $quantity = intval($_POST["quantity"]);
+            
+            echo '<form method="POST" action="ReceiptExplanation.php">';
+            for ($i = 1; $i <= $quantity; $i++) {
+                echo '<table border="1">';
+                echo '<tr><th>Date: </th><td><input type="date" id="date" name="date[]"></td></tr>';
+                echo '<tr><th>Invoice Number</th><td><input type="text" id="invoice_number" name="invoice_number[]"></td></tr>';
+                echo '<tr><th>Total amount of receipt: </th><td><input type="text" id="total_amount_of_receipt" name="total_amount_of_receipt[]"></td></tr>';
+                echo '<tr><th>Cost category: </th><td><input type="text" id="cost_category" name="cost_category[]"></td></tr>';
+                echo '<tr><th>Purpose: </th><td><input type="text" id="purpose" name="purpose[]"></td></tr>';
+                echo '<tr><th>Note: </th><td><input type="text" id="note" name="note[]"></td></tr>';
+                echo '</table><br>';
+            }
+            echo '<button type="submit" class="submitbtn">Submit all</button>';
+            echo '</form>';
+        }
+        ?>
     </div>
 </body>
 </html>
