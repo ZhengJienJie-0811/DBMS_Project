@@ -43,10 +43,16 @@ if ($types && $params) {
 }
 
 $stmt->execute();
-$result = $stmt->get_result();
 
-while ($row = $result->fetch_assoc()) {
-    echo "<p>Plan Name: " . htmlspecialchars($row['plan_name']) . "<br>Plan Number: " . htmlspecialchars($row['plan_number']) . "</p>";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // 輸出數據
+    while($row = $result->fetch_assoc()) {
+        echo "Plan Name: " . $row["plan_name"]. " - Plan Number: " . $row["plan_number"]. "<br>";
+    }
+} else {
+    echo "No results found.";
 }
 
 $stmt->close();
