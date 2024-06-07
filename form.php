@@ -26,6 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $budget_subject = $_POST['budget_subject'];
     $document_amount = $_POST['document_amount'];
     $total_amount = $_POST['total_amount'];
+    $quantity = $_POST['quantity'];
+
+    $_SESSION['quantity'] = $quantity;
 
     if (count($array) == 2) {
         $plan_number = $array[0];
