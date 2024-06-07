@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form</title>
+    </head>
+    <body>
+        <div class="container">
+            <p>
+                Please enter the information below! 
+            </p>
+            <form method="POST" action="Add.php" >
+                <table border="1">
+                <tr>
+                    <th>Date: </th>
+                    <td>
+                        <input type="date" id=" date" name="print_date">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Title: </th>
+                    <td>
+                        <input type="text" id="title" name="title" value="國立政治大學112學年度第2學期">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Reason: </th>
+                    <td>
+                        Plan number: <input type="text" id="plan_number" name="plan_number">
+                        Budge subject: 
+                        <select id="budeg_subject">
+                            <option value="transportation">Transportation</option>
+                            <option value="meal">Meal</option>
+                            <option value="office_supplies">Office supplies</option>
+                            <option value="lecturer's_fee">Lecturer's fee</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Quantity of receipt: </th>
+                    <td>
+                        <input type="text" id="document_amount" name="document_amount">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Total amount: </th>
+                    <td>
+                        <input type="text" id="total_amount" name="total_amount">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="personnel">Personnel</label></th>
+                    <td>
+                        <select id="personnel">
+                            <option value="staff">staff</option>
+                            <option value="student">student</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="id-number">Staff ID/Student ID: </label></th>
+                    <td><input type="text" id="id-number" placeholder="Maintenance of data for off-campus personnel"></td>
+                </tr>
+                <tr>
+                    <th><label for="name">Name: </label></th>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <th><label for="account">Account: </label></th>
+                    <td><input type="text" id="account"></td>
+                </tr>
+                <tr>
+                    <th><label for="PayableDate">Payable Date: </label></th>
+                    <td>
+                        <input type="date" id="PayableDate" name="PayableDate">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="item">Item: </label></th>
+                    <td>
+                        <select id="item">
+                            <option value="0">0 Register</option>
+                            <option value="0">1 Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2" class="section-title">Payable amount: </th>
+                </tr>
+                <tr>
+                    <th><label for="unitPrice">Unit price: </label></th>
+                    <td><input type="text" id="unitPrice"></td>
+                </tr>
+                <tr>
+                    <th><label for="quantity">Quantity: </label></th>
+                    <td><input type="number" id="quantity"></td>
+                </tr>
+                <tr>
+                    <th><label for="amount">Total amount: </label></th>
+                    <td><input type="text" id="amount"></td>
+                </tr>
+                <tr>
+                    <th><label for="paymentAmount">Payment amount: </label></th>
+                    <td><input type="text" id="paymentAmount"></td>
+                </tr>
+                <tr>
+                    <th><label for="remarks">Remarks: </label></th>
+                    <td><textarea id="remarks" rows="3"></textarea></td>
+                </tr>
+            </table>
+            </form>
+        </div>
+        <div class="container">
+            <p>
+                Please enter the information below! 
+            </p>
+            <form method="POST" action="ReceiptExplanation.php">
+            <table border="1">
+                    <tr>
+                        <th>Date: </th>
+                        <td>
+                            <input type="date" id="date" name="date">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Invoice Number</th>
+                        <td>
+                            <input type="text" id="invoice_number" name="invoice_number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Total amount of receipt: </th>
+                        <td>
+                            <input type="text" id="total_amount_of_receipt" name="total_amount_of_receipt">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cost category: </th>
+                        <td>
+                            <input type="text" id="cost_category" name="cost_category">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Purpose: </th>
+                        <td>
+                            <input type="text" id="purpose" name="purpose">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Note: </th>
+                        <td>
+                            <input type="text" id="note" name="note">
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" class="submitbtn">Store</button>
+            </form>
+            <form method="POST" action="output.html">
+                <button type="submit" class="submitbtn">View</button>
+            </form>
+        </div>
+    </body>
+</html>
