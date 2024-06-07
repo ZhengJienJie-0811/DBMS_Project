@@ -5,20 +5,30 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Form</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            function searchPlan() {
-                var planName = document.getElementById('plan_name').value;
-                var planNumber = document.getElementById('plan_number').value;
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'SearchPlan.php?plan_name=' + encodeURIComponent(planName) + '&plan_number=' + encodeURIComponent(planNumber), true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        document.getElementById('results').innerHTML = xhr.responseText;
-                    }
-                };
-                xhr.send();
-            }
-        </script>
+        function searchPlan() {
+            var keyword = $('#plan_name_keyword').val();
+            var planNumber = $('#plan_number').val();
+
+            $.ajax({
+                url: 'SearchPlan.php',
+                type: 'GET',
+                data: {
+                    plan_name_keyword: keyword,
+                    plan_number: planNumber
+                },
+                success: function(response) {
+                    $('#results').html(response);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('#plan_name_keyword').on('input', SearchPlan);
+            $('#plan_number').on('input', SearchPlan);
+        });
+    </script>
     </head>
     <body>
         <div class="container">
@@ -43,11 +53,8 @@
                         <br>
                         Plan search: 
                         <form onsubmit="event.preventDefault(); searchPlan();">
-                            <label for="plan_name_keyword">Keyword search:</label>
+                            <label for="plan_name_keyword">Plan keyword:</label>
                             <input type="text" id="plan_name_keyword" name="plan_name_keyword">
-                            <br>
-                            <label for="plan_number">Plan Number:</label>
-                            <input type="text" id="plan_number" name="plan_number">
                             <br>
                             <button type="submit" class="btn">Search</button>
                         </form>
