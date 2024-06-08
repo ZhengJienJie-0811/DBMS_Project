@@ -43,8 +43,7 @@ if ($types && $params) {
 }
 
 $stmt->execute();
-
-$result = $conn->query($sql);
+$result = $stmt->get_result();  // 获取结果集
 
 if ($result->num_rows > 0) {
     // 輸出數據

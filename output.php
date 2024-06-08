@@ -2,10 +2,10 @@
 session_start();
 $servername = "localhost"; // MySQL 伺服器主機名稱
 $username = "root"; // MySQL 使用者名稱
-$password = "5y20d"; // MySQL 密碼
-$dbname = "phpmyadmin"; // 資料庫名稱
+$password = ""; // MySQL 密碼
+$dbname = "DBMS_Project"; // 資料庫名稱
 
-$conn = new mysqli("localhost", "root", "5y20d","phpmyadmin");
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
