@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $budget_subject = $_POST['budget_subject'];
     $plan_number = $_POST['plan_number'];
     $title = $_POST['title'];
-    $reason = $_POST['plan_number']+ "_" + $_POST['budget_subject'];
+    $reason = $_POST['plan_number']. "_" . $_POST['budget_subject'];
     $document_code = '';
     $inventory_number = '';
     $underLine = '_';
