@@ -9,8 +9,7 @@
 <body>
     <div class="container">
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $quantity = isset($_POST["quantity"]) ? intval($_POST["quantity"]) : 0;
+        $quantity = $_SESSION['quantity']
 
             if ($quantity > 0) {
                 echo '<form method="POST" action="ReceiptExplanation.php">';
