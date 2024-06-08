@@ -22,44 +22,56 @@ if (!isset($_SESSION['inventory_number'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $date = $_POST['date'];
-    $invoice_number = $_POST['invoice_number'];
-    $total_amount_of_receipt = $_POST['total_amount_of_receipt'];
-    $cost_category = $_POST['cost_category'];
-    $purpose = $_POST['purpose'];
-    $note = $_POST['note'];
+    $dates = $_POST['date'];
+    $invoice_numbers = $_POST['invoice_number'];
+    $total_amounts_of_receipt = $_POST['total_amount_of_receipt'];
+    $cost_categories = $_POST['cost_category'];
+    $purposes = $_POST['purpose'];
+    $notes = $_POST['note'];
 
     $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date, inventory_number) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssisss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date, $inventory_number);
 
-    if ($stmt->execute()) {
-        echo  "<html lang='en'>
-        <head>
-            <meta charset='UTF-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <title>Registration Success</title>
-            <style>
-                body { font-family: Arial, sans-serif; }
-                .container { text-align: center; margin-top: 50px; }
-                .btn { display: inline-block; padding: 10px 20px; font-size: 16px; text-decoration: none; color: white; background-color: #4CAF50; border: none; border-radius: 5px; }
-                .btn:hover { background-color: #45a049; }
-            </style>
-        </head>
-        <body>
-            <div class='container'>
-                <h1>儲存成功</h1>
-                <p>請點選按鈕返回</p>
-                <form method='POST' action='function.html'>
-                    <button type='submit' class='btn'>返回</button>
-                </form>
-            </div>
-        </body>
-        </html>";
+    for ($i = 0; $i < count($dates); $i++) {
+        $date = $dates[$i];
+        $invoice_number = $invoice_numbers[$i];
+        $total_amount_of_receipt = $total_amounts_of_receipt[$i];
+        $cost_category = $cost_categories[$i];
+        $purpose = $purposes[$i];
+        $note = $notes[$i];
 
-    } else {
-        echo "錯誤: " . $sql . "<br>" . $conn->error;
+        $stmt->bind_param("sssisss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date, $inventory_number);
+
+        if (!$stmt->execute()) {
+            echo "錯誤: " . $sql . "<br>" . $conn->error;
+            $stmt->close();
+            $conn->close();
+            exit();
+        }
     }
+
+    echo  "<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Registration Success</title>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            .container { text-align: center; margin-top: 50px; }
+            .btn { display: inline-block; padding: 10px 20px; font-size: 16px; text-decoration: none; color: white; background-color: #4CAF50; border: none; border-radius: 5px; }
+            .btn:hover { background-color: #45a049; }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <h1>儲存成功</h1>
+            <p>請點選按鈕返回</p>
+            <form method='POST' action='function.html'>
+                <button type='submit' class='btn'>返回</button>
+            </form>
+        </div>
+    </body>
+    </html>";
 
     $stmt->close();
 }
