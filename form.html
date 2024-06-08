@@ -52,9 +52,9 @@
                         Plan number: <input type="text" id="plan_number" name="plan_number">
                         <br>
                         Plan search: 
-                        <form onsubmit="event.preventDefault(); searchPlan();">
+                        <form method= "POST" action= "SearchPlan.php">
                             <label for="plan_name_keyword">Plan keyword:</label>
-                            <input type="text" id="plan_name_keyword" name="plan_name_keyword">
+                            <input type="text" id="plan_name" name="plan_name">
                             <br>
                             <button type="submit" class="btn">Search</button>
                         </form>
