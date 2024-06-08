@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
 
-// 从会话中获取 inventory_number 和 quantity
+// 从会话中获取 inventory_number
 if (!isset($_SESSION['inventory_number'])) {
     echo "無法找到 inventory_number。\n";
     exit();
@@ -21,28 +21,17 @@ if (!isset($_SESSION['inventory_number'])) {
     $inventory_number = $_SESSION['inventory_number'];
 }
 
-if (!isset($_SESSION['quantity'])) {
-    echo "無法找到 quantity。\n";
-    exit();
-} else {
-    $quantity = $_SESSION['quantity'];
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $dates = $_POST["date"];
-    $invoice_numbers = $_POST["invoice_number"];
-    $total_amounts_of_receipt = $_POST["total_amount_of_receipt"];
-    $cost_categories = $_POST["cost_category"];
-    $purposes = $_POST["purpose"];
-    $notes = $_POST["note"];
+    $date = $_POST['date'];
+    $invoice_number = $_POST['invoice_number'];
+    $total_amount_of_receipt = $_POST['total_amount_of_receipt'];
+    $cost_category = $_POST['cost_category'];
+    $purpose = $_POST['purpose'];
+    $note = $_POST['note'];
 
     $sql = "INSERT INTO receipt_explanation (cost_category, note, invoice_number, total_amount_of_receipt, purpose, date, inventory_number) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-
-    for ($i = 0; $i < count($dates); $i++) {
-        $stmt->bind_param("sssisss", $cost_categories[$i], $notes[$i], $invoice_numbers[$i], $total_amounts_of_receipt[$i], $purposes[$i], $dates[$i], $inventory_number);
-        $stmt->execute();
-    }
+    $stmt->bind_param("sssisss", $cost_category, $note, $invoice_number, $total_amount_of_receipt, $purpose, $date, $inventory_number);
 
     if ($stmt->execute()) {
         echo  "<html lang='en'>
@@ -67,40 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </body>
         </html>";
+
     } else {
         echo "錯誤: " . $sql . "<br>" . $conn->error;
     }
 
     $stmt->close();
-} else {
-    echo '<!DOCTYPE html>
-    <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Receipt Explanation</title>
-    </head>
-    <body>
-        <div class="container">
-            <form method="POST" action="ReceiptExplanation.php">';
-    
-    for ($i = 1; $i <= $quantity; $i++) {
-        echo '<table border="1">';
-        echo '<tr><th>Date: </th><td><input type="date" id="date" name="date[]"></td></tr>';
-        echo '<tr><th>Invoice Number</th><td><input type="text" id="invoice_number" name="invoice_number[]"></td></tr>';
-        echo '<tr><th>Total amount of receipt: </th><td><input type="text" id="total_amount_of_receipt" name="total_amount_of_receipt[]"></td></tr>';
-        echo '<tr><th>Cost category: </th><td><input type="text" id="cost_category" name="cost_category[]"></td></tr>';
-        echo '<tr><th>Purpose: </th><td><input type="text" id="purpose" name="purpose[]"></td></tr>';
-        echo '<tr><th>Note: </th><td><input type="text" id="note" name="note[]"></td></tr>';
-        echo '</table><br>';
-    }
-
-    echo '<button type="submit" class="submitbtn">Submit all</button>';
-    echo '</form>
-        </div>
-    </body>
-    </html>';
 }
 
 $conn->close();
