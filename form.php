@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql1 = "INSERT INTO inventory (document_code, inventory_number, plan_number, budget_subject, print_date, title, account) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt1 = $conn->prepare($sql1);
-    $stmt1->bind_param("sssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $account);
+    $stmt1->bind_param("sssssss", $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $account);
 
     $sql2 = "INSERT INTO receipt_keeping_list (total_amount, plan_number, budget_subject, document_amount, inventory_number) VALUES (?, ?, ?, ?, ?)";
     $stmt2 = $conn->prepare($sql2);
