@@ -25,19 +25,19 @@
         }
 
         $(document).ready(function() {
-            $('#plan_name_keyword').on('input', SearchPlan);
-            $('#plan_number').on('input', SearchPlan);
+            $('#plan_name_keyword').on('input', searchPlan);
+            $('#plan_number').on('input', searchPlan);
         });
-    </script>
+        </script>
     </head>
     <body>
         <div class="container">
-            <form method="POST" action="form.php" >
+            <form method="POST" action="form.php">
                 <table border="1">
                 <tr>
                     <th>Date: </th>
                     <td>
-                        <input type="date" id=" date" name="print_date">
+                        <input type="date" id="date" name="print_date">
                     </td>
                 </tr>
                 <tr>
@@ -52,19 +52,19 @@
                         Plan number: <input type="text" id="plan_number" name="plan_number">
                         <br>
                         Plan search: 
-                        <form onsubmit="event.preventDefault(); searchPlan();">
+                        <div>
                             <label for="plan_name_keyword">Plan keyword:</label>
-                            <input type="text" id="plan_name" name="plan_name">
+                            <input type="text" id="plan_name_keyword" name="plan_name_keyword">
                             <br>
-                            <button type="submit" class="btn">Search</button>
-                        </form>
+                            <button type="button" class="btn" onclick="searchPlan()">Search</button>
+                        </div>
                         <br>
                         Budge subject: 
-                        <select id="budeg_subject">
+                        <select id="budget_subject">
                             <option value="transportation">Transportation</option>
                             <option value="meal">Meal</option>
                             <option value="office_supplies">Office supplies</option>
-                            <option value="lecturer's_fee">Lecturer's fee</option>
+                            <option value="lecturer_fee">Lecturer's fee</option>
                             <option value="other">Other</option>
                         </select>
                     </td>
@@ -137,11 +137,11 @@
                     <th><label for="remarks">Remarks: </label></th>
                     <td><textarea id="remarks" rows="3"></textarea></td>
                 </tr>
-                
             </table>
             <button type="submit" value="Submit" class="submitbtn">Submit</button>
             <button type="reset" value="Reset" class="submitbtn">Reset</button>
             </form>
+            <div id="results"></div>
         </div>
     </body>
 </html>
