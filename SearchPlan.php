@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$planName = isset($_GET['plan_name']) ? $_GET['plan_name'] : '';
+$planName = isset($_GET['plan_name_keyword']) ? $_GET['plan_name_keyword'] : '';
 $planNumber = isset($_GET['plan_number']) ? $_GET['plan_number'] : '';
 
 $sql = "SELECT * FROM plan WHERE 1=1";  // 使用 1=1 來簡化條件附加
