@@ -1,3 +1,8 @@
+<?php
+session_start();
+$quantity = isset($_SESSION['quantity']) ? $_SESSION['quantity'] : 0;
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,27 +14,22 @@
 <body>
     <div class="container">
         <?php
-        $quantity = $_SESSION['quantity']
-
-            if ($quantity > 0) {
-                echo '<form method="POST" action="ReceiptExplanation.php">';
-                for ($i = 1; $i <= $quantity; $i++) {
-                    echo '<table border="1">';
-                    echo '<tr><th>Date: </th><td><input type="date" id="date" name="date[]"></td></tr>';
-                    echo '<tr><th>Invoice Number</th><td><input type="text" id="invoice_number" name="invoice_number[]"></td></tr>';
-                    echo '<tr><th>Total amount of receipt: </th><td><input type="text" id="total_amount_of_receipt" name="total_amount_of_receipt[]"></td></tr>';
-                    echo '<tr><th>Cost category: </th><td><input type="text" id="cost_category" name="cost_category[]"></td></tr>';
-                    echo '<tr><th>Purpose: </th><td><input type="text" id="purpose" name="purpose[]"></td></tr>';
-                    echo '<tr><th>Note: </th><td><input type="text" id="note" name="note[]"></td></tr>';
-                    echo '</table><br>';
-                }
-                echo '<button type="submit" class="submitbtn">Submit all</button>';
-                echo '</form>';
-            } else {
-                echo '<p>No quantity provided or quantity is zero.</p>';
+        if ($quantity > 0) {
+            echo '<form method="POST" action="ReceiptExplanation.php">';
+            for ($i = 1; $i <= $quantity; $i++) {
+                echo '<table border="1">';
+                echo '<tr><th>Date: </th><td><input type="date" id="date" name="date[]"></td></tr>';
+                echo '<tr><th>Invoice Number</th><td><input type="text" id="invoice_number" name="invoice_number[]"></td></tr>';
+                echo '<tr><th>Total amount of receipt: </th><td><input type="text" id="total_amount_of_receipt" name="total_amount_of_receipt[]"></td></tr>';
+                echo '<tr><th>Cost category: </th><td><input type="text" id="cost_category" name="cost_category[]"></td></tr>';
+                echo '<tr><th>Purpose: </th><td><input type="text" id="purpose" name="purpose[]"></td></tr>';
+                echo '<tr><th>Note: </th><td><input type="text" id="note" name="note[]"></td></tr>';
+                echo '</table><br>';
             }
+            echo '<button type="submit" class="submitbtn">Submit all</button>';
+            echo '</form>';
         } else {
-            echo '<p>Invalid request method.</p>';
+            echo '<p>No quantity provided or quantity is zero.</p>';
         }
         ?>
     </div>
