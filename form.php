@@ -15,15 +15,14 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $print_date = $_POST['print_date'];
+    $budget_subject = $_POST['budget_subject'];
+    $plan_number = $_POST['plan_number'];
     $title = $_POST['title'];
-    $reason = $_POST['reason'];
-    $plan_name = $_POST['plan_name'];
+    $reason = $_POST['plan_number']+ "_" + $_POST['budget_subject'];
     $document_code = '';
     $inventory_number = '';
     $underLine = '_';
     $array = explode($underLine, $reason);
-    $plan_number = $_POST['plan_number'];
-    $budget_subject = $_POST['budget_subject'];
     $document_amount = $_POST['document_amount'];
     $total_amount = $_POST['total_amount'];
     $quantity = $_POST['quantity'];
@@ -62,9 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $account = $_SESSION['account'];
     }
 
-    $sql1 = "INSERT INTO inventory (plan_name, document_code, inventory_number, plan_number, budget_subject, print_date, title, account) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql1 = "INSERT INTO inventory (document_code, inventory_number, plan_number, budget_subject, print_date, title, account) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt1 = $conn->prepare($sql1);
-    $stmt1->bind_param("ssssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $account);
+    $stmt1->bind_param("sssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $account);
 
     $sql2 = "INSERT INTO receipt_keeping_list (total_amount, plan_number, budget_subject, document_amount, inventory_number) VALUES (?, ?, ?, ?, ?)";
     $stmt2 = $conn->prepare($sql2);
