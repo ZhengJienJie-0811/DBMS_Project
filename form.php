@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $account = $_SESSION['account'];
     }
 
-    $sql1 = "INSERT INTO inventory (document_code, inventory_number, plan_number, budget_subject, print_date, title, account) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql1 = "INSERT INTO inventory (document_code, inventory_number, plan_number, budget_subject, print_date, title, account) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt1 = $conn->prepare($sql1);
     $stmt1->bind_param("sssssss", $plan_name, $document_code, $inventory_number, $plan_number, $budget_subject, $print_date, $title, $account);
 
