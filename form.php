@@ -53,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $document_code = generateDc();
     $inventory_number = generateIn();
 
+    $_SESSION['inventory_number'] = $inventory_number;
     // 从会话中获取 account
     if (!isset($_SESSION['account'])) {
         echo "用戶未登錄。\n";
@@ -86,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class='container'>
                 <h1>儲存成功</h1>
                 <p>請點選按鈕到下一步</p>
-                <form method='POST' action='ReceiptExplanation.html'>
+                <form method='POST' action='ReceiptExplanation.php'>
                     <button type='submit' class='btn'>Next</button>
                 </form>
             </div>
